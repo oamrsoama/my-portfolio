@@ -185,7 +185,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .svc-tag{font-size:.58rem;font-family:var(--mono);padding:3px 8px;border-radius:2px;background:rgba(232,69,10,.05);color:var(--accent2);border:1px solid rgba(232,69,10,.15);}
 
 /* PROJECTS CARDS */
-.prj-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;}
+.prj-hd{display:flex;flex-direction:column;gap:12px;margin-bottom:44px;}
 .prj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .prj-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .25s,transform .25s;position:relative;}
 .prj-card:hover{border-color:var(--border2);transform:translateY(-5px);}
@@ -340,7 +340,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
       <div class="hero-name-accent">OSAMA.</div>
     </div>
     <div class="hero-role"><span id="typewriter"></span><span id="typewriter-cursor"></span></div>
-    <p class="hero-desc">مطور ومصمم مواقع ويب — بحول <strong>الأفكار لمنتجات رقمية احترافية</strong> تجمع بين الكود النظيف والتجربة البصرية المميزة.</p>
+    <p class="hero-desc" dir="rtl">مطور ومصمم مواقع ويب — بحول <strong>الأفكار لمنتجات رقمية احترافية</strong> تجمع بين الكود النظيف والتجربة البصرية المميزة.</p>
     <div class="hero-btns">
       <a href="#projects" class="btn-p mag-btn">VIEW WORK →</a>
       <a href="#contact" class="btn-s mag-btn">LET'S TALK</a>
@@ -382,7 +382,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
     <div class="rv">
       <span class="s-num">// 02 — WHO I AM</span>
       <h2 class="s-title">ABOUT <em>ME</em></h2>
-      <p class="s-sub">مطور ويب بيشتغل على مشاريع حقيقية من البداية للنهاية</p>
+      <p class="s-sub" dir="rtl">مطور ويب بيشتغل على مشاريع حقيقية من البداية للنهاية</p>
       <div class="about-info">
         <div class="icard"><span class="icard-ico">💬</span><span>WhatsApp: <strong>+20 1011 656 387</strong></span></div>
         <div class="icard"><span class="icard-ico">📧</span><span>Email: <strong>omarosama@email.com</strong></span></div>
@@ -391,8 +391,8 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
       </div>
     </div>
     <div class="about-body rv d1">
-      <p>أنا <strong>Omar Osama</strong> — مطور ومصمم مواقع ويب. بتخصص في بناء تجارب رقمية احترافية تجمع بين <strong>الأداء التقني</strong> والتصميم البصري المميز.</p>
-      <p>بشتغل على مشاريع متنوعة في مجال <span dir="ltr"><strong>Web Development</strong></span> — من المواقع التسويقية والـ <span dir="ltr">landing pages</span>، للمنصات التفاعلية. هدفي إن كل مشروع يكون نظيف، سريع، واحترافي.</p>
+      <p dir="rtl">أنا <strong>Omar Osama</strong> — مطور ومصمم مواقع ويب. بتخصص في بناء تجارب رقمية احترافية تجمع بين <strong>الأداء التقني</strong> والتصميم البصري المميز.</p>
+      <p dir="rtl">بشتغل على مشاريع متنوعة في مجال <span dir="ltr"><strong>Web Development</strong></span> — من المواقع التسويقية والـ <span dir="ltr">landing pages</span>، للمنصات التفاعلية. هدفي إن كل مشروع يكون نظيف، سريع، واحترافي.</p>
       <div class="tags">
         <span class="tag-item">HTML5</span><span class="tag-item">CSS3</span><span class="tag-item">JavaScript</span>
         <span class="tag-item">Responsive Design</span><span class="tag-item">UI / UX</span>
@@ -407,15 +407,15 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
   <div class="s-inner">
     <div class="svc-hd rv">
       <div><span class="s-num">// 03 — WHAT I DO</span><h2 class="s-title">MY <em>SERVICES</em></h2></div>
-      <p class="s-sub" style="max-width:220px">خدمات <span dir="ltr">Web Development</span> من البداية للنهاية</p>
+      <p class="s-sub" dir="rtl" style="max-width:220px;text-align:right;">خدمات <span dir="ltr">Web Development</span> من البداية للنهاية</p>
     </div>
     <div class="svc-grid">
-      <div class="svc-item rv"><span class="svc-n">01</span><span class="svc-ico">🖥️</span><div class="svc-title">WEB DEV</div><div class="svc-desc">تطوير مواقع ويب احترافية من الصفر — كود نظيف وأداء عالي.</div><div class="svc-tags"><span class="svc-tag">HTML</span><span class="svc-tag">CSS</span><span class="svc-tag">JS</span></div></div>
-      <div class="svc-item rv d1"><span class="svc-n">02</span><span class="svc-ico">🎨</span><div class="svc-title">UI / UX</div><div class="svc-desc">تصميم واجهات مستخدم جذابة ومدروسة — كل قرار بيخدم هدف واضح.</div><div class="svc-tags"><span class="svc-tag">Figma</span><span class="svc-tag">Design Systems</span></div></div>
-      <div class="svc-item rv d2"><span class="svc-n">03</span><span class="svc-ico">📱</span><div class="svc-title">RESPONSIVE</div><div class="svc-desc">موقعك هيبان احترافي على كل الأجهزة — موبايل، تابلت، وشاشات كبيرة.</div><div class="svc-tags"><span class="svc-tag">Mobile First</span><span class="svc-tag">Grid</span></div></div>
-      <div class="svc-item rv"><span class="svc-n">04</span><span class="svc-ico">🚀</span><div class="svc-title">LANDING PAGES</div><div class="svc-desc">صفحات هبوط موجهة للتحويل — تصميم بيحول الزائر لعميل.</div><div class="svc-tags"><span class="svc-tag">Conversion</span><span class="svc-tag">CTA</span></div></div>
-      <div class="svc-item rv d1"><span class="svc-n">05</span><span class="svc-ico">✨</span><div class="svc-title">ANIMATIONS</div><div class="svc-desc">أنيميشنز <span dir="ltr">CSS/JS</span> احترافية تضيف حيوية وعمق لموقعك.</div><div class="svc-tags"><span class="svc-tag">CSS Animations</span><span class="svc-tag">Scroll FX</span></div></div>
-      <div class="svc-item rv d2"><span class="svc-n">06</span><span class="svc-ico">📚</span><div class="svc-title">EDUCATIONAL</div><div class="svc-desc">منصات تعليمية تفاعلية تحول المحتوى الأكاديمي لتجربة مميزة.</div><div class="svc-tags"><span class="svc-tag">Interactive</span><span class="svc-tag">Content</span></div></div>
+      <div class="svc-item rv"><span class="svc-n">01</span><span class="svc-ico">🖥️</span><div class="svc-title">WEB DEV</div><div class="svc-desc"><span dir="rtl">تطوير مواقع ويب احترافية من الصفر — كود نظيف وأداء عالي.</span></div><div class="svc-tags"><span class="svc-tag">HTML</span><span class="svc-tag">CSS</span><span class="svc-tag">JS</span></div></div>
+      <div class="svc-item rv d1"><span class="svc-n">02</span><span class="svc-ico">🎨</span><div class="svc-title">UI / UX</div><div class="svc-desc"><span dir="rtl">تصميم واجهات مستخدم جذابة ومدروسة — كل قرار بيخدم هدف واضح.</span></div><div class="svc-tags"><span class="svc-tag">Figma</span><span class="svc-tag">Design Systems</span></div></div>
+      <div class="svc-item rv d2"><span class="svc-n">03</span><span class="svc-ico">📱</span><div class="svc-title">RESPONSIVE</div><div class="svc-desc"><span dir="rtl">موقعك هيبان احترافي على كل الأجهزة — موبايل، تابلت، وشاشات كبيرة.</span></div><div class="svc-tags"><span class="svc-tag">Mobile First</span><span class="svc-tag">Grid</span></div></div>
+      <div class="svc-item rv"><span class="svc-n">04</span><span class="svc-ico">🚀</span><div class="svc-title">LANDING PAGES</div><div class="svc-desc"><span dir="rtl">صفحات هبوط موجهة للتحويل — تصميم بيحول الزائر لعميل.</span></div><div class="svc-tags"><span class="svc-tag">Conversion</span><span class="svc-tag">CTA</span></div></div>
+      <div class="svc-item rv d1"><span class="svc-n">05</span><span class="svc-ico">✨</span><div class="svc-title">ANIMATIONS</div><div class="svc-desc"><span dir="rtl">أنيميشنز <span dir="ltr">CSS/JS</span> احترافية تضيف حيوية وعمق لموقعك.</span></div><div class="svc-tags"><span class="svc-tag">CSS Animations</span><span class="svc-tag">Scroll FX</span></div></div>
+      <div class="svc-item rv d2"><span class="svc-n">06</span><span class="svc-ico">📚</span><div class="svc-title">EDUCATIONAL</div><div class="svc-desc"><span dir="rtl">منصات تعليمية تفاعلية تحول المحتوى الأكاديمي لتجربة مميزة.</span></div><div class="svc-tags"><span class="svc-tag">Interactive</span><span class="svc-tag">Content</span></div></div>
     </div>
   </div>
 </section>
@@ -425,22 +425,22 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
   <div class="s-inner">
     <div class="prj-hd rv">
       <div><span class="s-num">// 04 — FEATURED WORK</span><h2 class="s-title">SELECTED <em>PROJECTS</em></h2></div>
-      <p class="s-sub" style="max-width:260px">أنا مطور ويب بشتغل على مشاريع متنوعة — المشاريع دي بالأخص في المجال التعليمي كنموذج على قدرتي في بناء منصات تفاعلية احترافية</p>
+      <p class="s-sub" dir="rtl" style="max-width:400px;text-align:right;">أنا مطور ويب بشتغل على مشاريع متنوعة — المشاريع دي بالأخص في المجال التعليمي كنموذج على قدرتي في بناء منصات تفاعلية احترافية</p>
     </div>
     <div class="prj-grid">
       <a href="exam_night_guide.html" class="prj-card rv">
         <div class="prj-preview"><div class="prj-preview-num">01</div><span class="prj-preview-badge">EDUCATIONAL</span><div class="prj-overlay"><span class="prj-overlay-txt">VIEW ↗</span></div></div>
-        <div class="prj-body"><span class="prj-idx">PROJECT — 01</span><div class="prj-name">EXAM NIGHT GUIDE</div><div class="prj-cap">مراجعة ليلة الامتحان — <span dir="ltr">English 2nd Secondary</span></div><div class="prj-tags"><span class="ptag">HTML / CSS</span><span class="ptag">Dark UI</span></div></div>
+        <div class="prj-body"><span class="prj-idx">PROJECT — 01</span><div class="prj-name">EXAM NIGHT GUIDE</div><div class="prj-cap" dir="rtl">مراجعة ليلة الامتحان — <span dir="ltr">English 2nd Secondary</span></div><div class="prj-tags"><span class="ptag">HTML / CSS</span><span class="ptag">Dark UI</span></div></div>
         <div class="prj-arrow">VIEW PROJECT ↗</div>
       </a>
       <a href="novel_around_world_80_days.html" class="prj-card rv d1">
         <div class="prj-preview"><div class="prj-preview-num">02</div><span class="prj-preview-badge">LITERATURE</span><div class="prj-overlay"><span class="prj-overlay-txt">VIEW ↗</span></div></div>
-        <div class="prj-body"><span class="prj-idx">PROJECT — 02</span><div class="prj-name">80 DAYS</div><div class="prj-cap">منصة أدبية تفاعلية — رواية <span dir="ltr">Jules Verne</span> بالعربي</div><div class="prj-tags"><span class="ptag">HTML / CSS / JS</span><span class="ptag">Interactive</span></div></div>
+        <div class="prj-body"><span class="prj-idx">PROJECT — 02</span><div class="prj-name">80 DAYS</div><div class="prj-cap" dir="rtl">منصة أدبية تفاعلية — رواية <span dir="ltr">Jules Verne</span> بالعربي</div><div class="prj-tags"><span class="ptag">HTML / CSS / JS</span><span class="ptag">Interactive</span></div></div>
         <div class="prj-arrow">VIEW PROJECT ↗</div>
       </a>
       <a href="تحليل_امتحانات_كيمياء_2ث_ترم2.html" class="prj-card rv d2">
         <div class="prj-preview"><div class="prj-preview-num">03</div><span class="prj-preview-badge">SCIENCE</span><div class="prj-overlay"><span class="prj-overlay-txt">VIEW ↗</span></div></div>
-        <div class="prj-body"><span class="prj-idx">PROJECT — 03</span><div class="prj-name">CHEMISTRY PLATFORM</div><div class="prj-cap">منصة كيمياء تعليمية — الصف الثاني الثانوي ترم 2</div><div class="prj-tags"><span class="ptag">HTML / CSS</span><span class="ptag">Cyberpunk UI</span></div></div>
+        <div class="prj-body"><span class="prj-idx">PROJECT — 03</span><div class="prj-name">CHEMISTRY PLATFORM</div><div class="prj-cap" dir="rtl">منصة كيمياء تعليمية — الصف الثاني الثانوي ترم 2</div><div class="prj-tags"><span class="ptag">HTML / CSS</span><span class="ptag">Cyberpunk UI</span></div></div>
         <div class="prj-arrow">VIEW PROJECT ↗</div>
       </a>
     </div>
@@ -470,7 +470,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
     <div class="rv">
       <span class="s-num">// 06 — LET'S TALK</span>
       <h2 class="ct-big">LET'S<br>BUILD<br><em>GREAT.</em></h2>
-      <p class="ct-sub">عندك مشروع في بالك؟ سواء موقع جديد، <span dir="ltr">landing page</span>، أو تجديد موقع قديم — تواصل معايا وهرد عليك.</p>
+      <p class="ct-sub" dir="rtl">عندك مشروع في بالك؟ سواء موقع جديد، <span dir="ltr">landing page</span>، أو تجديد موقع قديم — تواصل معايا وهرد عليك.</p>
       <a href="https://wa.me/201011656387" class="ct-btn mag-btn">💬 &nbsp; WHATSAPP NOW</a>
     </div>
     <div class="ct-links rv d1">
