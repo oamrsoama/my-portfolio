@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Around the World in 80 Days — بالمصري</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0e0b1a;
+    --surface:  #16122a;
+    --card:     #1e1a35;
+    --border:   #2e2855;
+    --gold:     #f5c842;
+    --red:      #e84040;
+    --teal:     #00d4c8;
+    --purple:   #b57bee;
+    --green:    #3ddc84;
+    --text:     #eae6ff;
+    --dim:      #8880aa;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── STARS BG ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,.30) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 80%, rgba(255,255,255,.20) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 45%, rgba(255,255,255,.28) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,.22) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 88%, rgba(255,255,255,.18) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,.24) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(180deg, rgba(90,40,140,.45) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 400px;
+    background: radial-gradient(ellipse, rgba(181,123,238,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .globe-icon {
+    font-size: 4em;
+    display: block;
+    margin-bottom: 14px;
+    animation: spin 18s linear infinite;
+    filter: drop-shadow(0 0 18px rgba(181,123,238,.6));
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .hero h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(1.7em, 5vw, 2.8em);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-sub {
+    color: var(--dim);
+    font-size: .95em;
+    margin-bottom: 20px;
+  }
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    background: rgba(255,255,255,.07);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: .8em;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  /* ─── NAV ─── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14,11,26,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--dim);
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: .82em;
+    font-weight: 700;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { color: var(--gold); border-color: var(--gold); }
+  .nav-btn.active {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+  }
+
+  /* ─── WRAPPER ─── */
+  .wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section { display: none; }
+  .section.active { display: block; animation: fadeUp .3s ease; }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(14px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ─── CHARACTERS GRID ─── */
+  .chars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .char-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+  }
+  .char-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.5);
+  }
+  .char-emoji { font-size: 3em; display: block; margin-bottom: 10px; }
+  .char-name {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.15em;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .char-role {
+    color: var(--teal);
+    font-size: .8em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .char-desc { color: var(--dim); font-size: .83em; line-height: 1.6; }
+
+  /* ─── CHAPTER CARDS ─── */
+  .ch-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow .25s;
+  }
+  .ch-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.45); }
+  .ch-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .ch-card.open .ch-header { border-color: var(--border); }
+  .ch-num {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.1em;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .ch-title-wrap { flex: 1; }
+  .ch-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.05em;
+    font-weight: 900;
+    margin-bottom: 3px;
+  }
+  .ch-subtitle { color: var(--dim); font-size: .8em; }
+  .ch-arrow {
+    color: var(--dim);
+    font-size: 1.2em;
+    transition: transform .3s;
+  }
+  .ch-card.open .ch-arrow { transform: rotate(180deg); }
+
+  .ch-body {
+    display: none;
+    padding: 20px;
+  }
+  .ch-card.open .ch-body { display: block; animation: fadeUp .25s ease; }
+
+  .ch-summary {
+    background: rgba(0,0,0,.25);
+    border-right: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 16px;
+    margin-bottom: 16px;
+    line-height: 1.8;
+    font-size: .92em;
+  }
+  .ch-summary p { margin-bottom: 10px; }
+  .ch-summary p:last-child { margin-bottom: 0; }
+
+  .ch-highlight {
+    background: rgba(245,200,66,.08);
+    border: 1px solid rgba(245,200,66,.3);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .ch-highlight h4 {
+    color: var(--gold);
+    font-size: .85em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .ch-highlight ul { list-style: none; padding: 0; }
+  .ch-highlight li {
+    color: var(--dim);
+    font-size: .85em;
+    padding: 4px 0;
+    padding-right: 18px;
+    position: relative;
+  }
+  .ch-highlight li::before {
+    content: '⭐';
+    position: absolute; right: 0;
+    font-size: .75em;
+  }
+
+  /* ─── QUESTIONS TABLE ─── */
+  .q-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: .88em;
+  }
+  .q-table thead tr {
+    background: linear-gradient(90deg, rgba(245,200,66,.2), rgba(0,212,200,.1));
+  }
+  .q-table th {
+    padding: 12px 14px;
+    text-align: right;
+    font-weight: 700;
+    border-bottom: 2px solid var(--gold);
+    color: var(--gold);
+  }
+  .q-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .q-table tr:hover td { background: rgba(255,255,255,.03); }
+  .q-cell { color: #fff; font-weight: 600; }
+  .a-cell { color: var(--teal); }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding-right: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    right: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--purple), var(--teal));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 22px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color .2s;
+  }
+  .tl-item:hover { border-color: var(--gold); }
+  .tl-dot {
+    position: absolute;
+    right: -24px; top: 18px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    background: var(--gold);
+  }
+  .tl-chapter {
+    color: var(--gold);
+    font-size: .78em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .tl-event {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: .95em;
+  }
+  .tl-detail { color: var(--dim); font-size: .83em; line-height: 1.5; }
+  .tl-emoji { float: left; font-size: 1.5em; margin-right: 10px; }
+
+  /* ─── SECTION TITLE ─── */
+  .sec-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.5em;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ─── LESSON BOX ─── */
+  .lesson-box {
+    background: linear-gradient(135deg, rgba(61,220,132,.08), rgba(0,212,200,.06));
+    border: 1px solid rgba(61,220,132,.3);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 24px;
+  }
+  .lesson-box h3 {
+    font-family: 'Tajawal', sans-serif;
+    color: var(--green);
+    font-size: 1.3em;
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+  .lesson-box p { color: var(--dim); line-height: 1.8; font-size: .92em; }
+  .lesson-box p strong { color: var(--text); }
+
+  /* color helpers */
+  .c7  { background: rgba(229,57,53,.15);  color: var(--red); }
+  .c8  { background: rgba(0,188,212,.15);  color: var(--teal); }
+  .c9  { background: rgba(245,200,66,.15); color: var(--gold); }
+  .c10 { background: rgba(181,123,238,.15);color: var(--purple); }
+  .c11 { background: rgba(61,220,132,.15); color: var(--green); }
+  .c12 { background: rgba(255,152,0,.15);  color: #ffb74d; }
+
+  @media (max-width:600px) {
+    .chars-grid { grid-template-columns: 1fr 1fr; }
+    .q-table { font-size: .78em; }
+    .q-table th, .q-table td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <span class="globe-icon">🌍</span>
+  <h1>Around the World in <em>80 Days</em></h1>
+  <p class="hero-sub">تلخيص القصة بالمصري البحت — الترم التاني | 2 ثانوي</p>
+  <div class="hero-badges">
+    <span class="badge">📖 فصل 7 → 12</span>
+    <span class="badge">🎯 أسئلة الامتحان</span>
+    <span class="badge">⏱ تايم لاين كامل</span>
+  </div>
+</div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="sticky-nav">
+  <button class="nav-btn active" onclick="show('s-chars',this)">🎭 الشخصيات</button>
+  <button class="nav-btn" onclick="show('s-chapters',this)">📚 الفصول</button>
+  <button class="nav-btn" onclick="show('s-timeline',this)">⏱ التايم لاين</button>
+  <button class="nav-btn" onclick="show('s-questions',this)">🎯 أسئلة الامتحان</button>
+</nav>
+
+<div class="wrapper">
+
+  <!-- ══════════ CHARACTERS ══════════ -->
+  <div id="s-chars" class="section active">
+    <div class="sec-title">🎭 الشخصيات — مين مين؟</div>
+    <div class="chars-grid">
+      <div class="char-card">
+        <span class="char-emoji">🎩</span>
+        <div class="char-name">Phileas Fogg</div>
+        <div class="char-role">البطل الإنجليزي</div>
+        <div class="char-desc">راجل غني جداً من لندن. هادي زي الجبل، بارد الأعصاب في أصعب المواقف، بيعمل كل حاجة بدقة دقيقة. راهن إنه يعمل جولة حول العالم في 80 يوم.</div>
+      </div>
+      <div class="char-card">
+        <span class="char-emoji">🤵</span>
+        <div class="char-name">Passepartout</div>
+        <div class="char-role">الخادم الفرنساوي</div>
+        <div class="char-desc">خادم فوغ الأمين. عاطفي ومتحمس وأحياناً مبسوط زيادة عن اللزوم 😄. بيحب سيده وبيتعرض لأكبر المصايب في الرحلة.</div>
+      </div>
+      <div class="char-card">
+        <span class="char-emoji">🕵️</span>
+        <div class="char-name">Detective Fix</div>
+        <div class="char-role">المحقق</div>
+        <div class="char-desc">محقق إنجليزي واخد في دماغه إن فوغ سرق بنك إنجلترا. بيجري وراه في كل مكان. في الآخر اكتشف إنه غلطان — والسارق الحقيقي كان في برايتون!</div>
+      </div>
+      <div class="char-card">
+        <span class="char-emoji">👸</span>
+        <div class="char-name">Aouda</div>
+        <div class="char-role">البطلة الهندية</div>
+        <div class="char-desc">ست هندية أنقذها فوغ من موت محتوم في الهند. انضمت للرحلة، وبمرور الوقت وقعت في حب فوغ وفي الآخر اتجوزته ❤️</div>
+      </div>
+    </div>
+
+    <div class="lesson-box">
+      <h3>🧭 الرهان اللي سبب كل حاجة!</h3>
+      <p>فوغ راهن زملاءه في <strong>نادي الإصلاح في لندن</strong> بـ<strong>20,000 جنيه إسترليني</strong> إنه يقدر يعمل جولة حول العالم في <strong>80 يوم بالظبط</strong>. خرج من اللندن 2 أكتوبر الساعة 8:45 مساءً ولازم يرجع في نفس الموعد!</p>
+    </div>
+  </div>
+
+  <!-- ══════════ CHAPTERS ══════════ -->
+  <div id="s-chapters" class="section">
+    <div class="sec-title">📚 الفصول — شرح بالتفصيل</div>
+
+    <!-- Chapter 7 -->
+    <div class="ch-card" id="ch7">
+      <div class="ch-header" onclick="toggle('ch7')">
+        <div class="ch-num c7">7</div>
+        <div class="ch-title-wrap">
+          <div class="ch-title">الفصل السابع — المحكمة في كلكتا!</div>
+          <div class="ch-subtitle">🇮🇳 الهند → كلكتا → هونغ كونغ</div>
+        </div>
+        <span class="ch-arrow">▼</span>
+      </div>
+      <div class="ch-body">
+        <div class="ch-summary">
+          <p>🚂 فوغ وباسبارتو وأودا وصلوا <strong>كلكتا</strong> بعد رحلة شاقة في الغابة. السفينة لهونغ كونغ هتمشي <strong>بعد ساعة واحدة بس!</strong> وفيكس كان في الخلفية بيراقبهم زي الضل.</p>
+          <p>🚔 فجأة اتنين شرطة جم وبلّغوهم إنهم موقوفين! السبب؟ باسبارتو كان دخل معبد هندي بحذاءه في رحلتهم قبل كده — وده جريمة في الهند!</p>
+          <p>⚖️ جه دور القاضي أوبادايا — الحكم طلع: <strong>باسبارتو 15 يوم</strong> وفوغ <strong>8 أيام!</strong> الاتنين اتصدموا بس فوغ كان هادي زي الحديدة! شال <strong>2000 جنيه إسترليني</strong> من جيبه وحطهم على المكتب: <em>"الكفالة."</em></p>
+          <p>🚢 اتحررت وجروا على الرصيف ولحقوا السفينة رانجون في آخر لحظة. Fix كان محبوط لأن التجار اللي المفروض يشهدوا ضد فوغ وصلوا متأخرين!</p>
+        </div>
+        <div class="ch-highlight">
+          <h4>⭐ المهم للامتحان</h4>
+          <ul>
+            <li>سبب الاعتقال: باسبارتو دخل معبد بحذاءه</li>
+            <li>فوغ دفع الكفالة: 2000 جنيه إسترليني</li>
+            <li>Fix كان بيراقبهم بس ما عملش حاجة</li>
+            <li>أودا شكرت فوغ على تضحيته بوقته وفلوسه</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 8 -->
+    <div class="ch-card" id="ch8">
+      <div class="ch-header" onclick="toggle('ch8')">
+        <div class="ch-num c8">8</div>
+        <div class="ch-title-wrap">
+          <div class="ch-title">الفصل الثامن — Fix خدّر باسبارتو!</div>
+          <div class="ch-subtitle">⚓ هونغ كونغ → شنغهاي → يوكوهاما</div>
+        </div>
+        <span class="ch-arrow">▼</span>
+      </div>
+      <div class="ch-body">
+        <div class="ch-summary">
+          <p>🚢 ركبوا السفينة رانجون وعدوا خليج البنغال. الرحلة مخططة تاخد 11 يوم بس فوغ عارف إنهم فاتوا يومين بالفعل. أودا بدأت تعجب بهدوء فوغ وثقته.</p>
+          <p>🌆 وصلوا هونغ كونغ 6 نوفمبر — متأخرين يوم. ابن عم أودا اتبين إنه اتنقل لهولندا! فوغ وعد يحميها لحد ما يرجعوا إنجلترا وهي قبلت وانضمت للرحلة بشكل دايم.</p>
+          <p>😱 فوغ اكتشف إن السفينة التانية (كارناتيك) مشت قبلهم بـ12 ساعة! والسفينة الجاية مش هتيجي 8 أيام. باسبارتو انهار من الصدمة!</p>
+          <p>😈 هنا Fix كشف لباسبارتو إنه محقق — بس ما قلوش يقول لفوغ! وبعدين <strong>خدّر باسبارتو</strong> في أوضة بيدخّن فيها أفيون! عشان فوغ ما يعرفش إن السفينة موجودة ويتأخر.</p>
+          <p>⛵ فوغ لقى سفينة صغيرة اسمها تانكادير — دفع 100 جنيه في اليوم + 200 جنيه مكافأة! مشوا لشنغهاي وباسبارتو اتسب في هونغ كونغ وصحي بعدين على السفينة كارناتيك كستووِيَّ!</p>
+          <p>🎪 في يوكوهاما فوغ لقى باسبارتو بيشتغل مع بهلوانية يابانية! وفوغ كان عارف إن Fix محقق بس اتجاهله. اشتروا تذاكر السفينة جنرال غرانت لسان فرانسيسكو.</p>
+        </div>
+        <div class="ch-highlight">
+          <h4>⭐ المهم للامتحان</h4>
+          <ul>
+            <li>Fix خدّر باسبارتو عشان يأخر فوغ</li>
+            <li>فوغ استأجر سفينة تانكادير بـ100 جنيه يوميًا</li>
+            <li>باسبارتو اتسب في هونغ كونغ بدون ما فوغ يعرف</li>
+            <li>فوغ كان عارف إن Fix محقق ولكن ما قالش</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 9 -->
+    <div class="ch-card" id="ch9">
+      <div class="ch-header" onclick="toggle('ch9')">
+        <div class="ch-num c9">9</div>
+        <div class="ch-title-wrap">
+          <div class="ch-title">الفصل التاسع — رحلة المحيط الهادي</div>
+          <div class="ch-subtitle">🌊 يوكوهاما → سان فرانسيسكو</div>
+        </div>
+        <span class="ch-arrow">▼</span>
+      </div>
+      <div class="ch-body">
+        <div class="ch-summary">
+          <p>🚢 السفينة جنرال غرانت مشت من يوكوهاما 14 نوفمبر لسان فرانسيسكو. الرحلة 22 يوم. فوغ كان متوقع يوصل 2 ديسمبر رغم التأخيرات.</p>
+          <p>😤 باسبارتو كان محتار ومتضايق من خداع Fix. توقع فوغ يزعل لكن لقاه هادي! وقاله إن Fix بيعمل شغلته بس وإنه مش ذنبه.</p>
+          <p>❤️ أودا لاحظت إزاي فوغ بيواجه الظلم والاتهام الكداب من غير ما ينكسر ولا يزعل. احترامها له اتحوّل لمودة حقيقية.</p>
+          <p>😬 Fix نفسه كان في موقف محرج — بيسافر على تذكرة فوغ وعارف إن أمر اعتقاله مش هينفع في سان فرانسيسكو (أمريكا). اضطر يكون حليفًا متترددًا لفوغ!</p>
+          <p>🐋 السفينة اصطدمت بمجموعة حيتان ضيّعوا <strong>3 ساعات</strong>! Fix انقلق. وصلوا سان فرانسيسكو 3 ديسمبر.</p>
+        </div>
+        <div class="ch-highlight">
+          <h4>⭐ المهم للامتحان</h4>
+          <ul>
+            <li>فوغ ما زعلش من Fix رغم إنه عارف إنه محقق</li>
+            <li>أودا وقعت في حب فوغ بسبب شجاعته وهدوءه</li>
+            <li>Fix بقى حليف مترددًا لفوغ لأنه محتاجه</li>
+            <li>خسروا 3 ساعات بسبب اصطدام بحيتان</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 10 -->
+    <div class="ch-card" id="ch10">
+      <div class="ch-header" onclick="toggle('ch10')">
+        <div class="ch-num c10">10</div>
+        <div class="ch-title-wrap">
+          <div class="ch-title">الفصل العاشر — القطار عبر أمريكا!</div>
+          <div class="ch-subtitle">🚂 سان فرانسيسكو → نيويورك</div>
+        </div>
+        <span class="ch-arrow">▼</span>
+      </div>
+      <div class="ch-body">
+        <div class="ch-summary">
+          <p>🚂 القطار الترانسكونتيننتال إكسبريس طلع من سان فرانسيسكو 3 ديسمبر. <strong>3786 ميل</strong> في <strong>7 أيام</strong> لنيويورك. فوغ كان بيدرس الجداول الزمنية والخرايط وأودا بتراقبه معجبة بدقته.</p>
+          <p>🦬 في نيفادا ويوتا، القطار واجه كباري ضعيفة وسكك غير مستقرة. فجأة <strong>قطيع جاموس</strong> سكّ السكة قدام سولت ليك سيتي لـ<strong>3 ساعات!</strong> فوغ سجّل الوقت الضايع بهدوء وباسبارتو كان مضطرب.</p>
+          <p>🌉 القطار وصل لكوبري هش فوق نهر بلات. المراقب قال: <em>"نعدي بأقصى سرعة عشان ما يوقعش!"</em> وفوغ وافق. عدوا بسرعة جنونية — وبعد ما عدوا الكوبري وقع في النهر! 😱</p>
+          <p>🪶 في كولورادو هجموا <strong>سيوكس</strong> (هنود أمريكيين) على القطار! فوغ دافع عن الركاب — Fix انضم له على مضض. باسبارتو فصل عربية المحرك عشان ينقذ الركاب <strong>بس اتأسر!</strong></p>
+          <p>💪 فوغ من غير تردد قرر <strong>يُنقذ خادمه</strong> بدل ما يكمل رحلته! راح البرية المتجمدة وحده لإنقاذ باسبارتو مختارًا الوفاء على جدوله!</p>
+        </div>
+        <div class="ch-highlight">
+          <h4>⭐ المهم للامتحان</h4>
+          <ul>
+            <li>جاموس سكّ السكة 3 ساعات قدام سولت ليك سيتي</li>
+            <li>الكوبري وقع في النهر بعد ما عدوا بثانية!</li>
+            <li>السيوكس هجموا وأسروا باسبارتو</li>
+            <li>فوغ راح البرية لإنقاذ باسبارتو رغم تأخير الرحلة</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 11 -->
+    <div class="ch-card" id="ch11">
+      <div class="ch-header" onclick="toggle('ch11')">
+        <div class="ch-num c11">11</div>
+        <div class="ch-title-wrap">
+          <div class="ch-title">الفصل الحادي عشر — الإنقاذ والزلاجة!</div>
+          <div class="ch-subtitle">❄️ البرية → نيويورك → المحيط الأطلسي</div>
+        </div>
+        <span class="ch-arrow">▼</span>
+      </div>
+      <div class="ch-body">
+        <div class="ch-summary">
+          <p>🏹 فوغ راح البرية المتجمدة بشجاعة وأنقذ باسبارتو من السيوكس <strong>بخطة ذكية وصامتة</strong>. بعد صدام عنيف، حرر خادمه بأمان. القطار كان مشى!</p>
+          <p>🛷 الحل الإبداعي: <strong>زلاجة هوائية</strong> — عربية صغيرة بشراع على الجليد — وصلتهم أوماها بسرعة رهيبة. لحقوا قطار شيكاغو وكملوا لنيويورك.</p>
+          <p>🗽 وصلوا نيويورك <strong>11 ديسمبر</strong>. بس السفينة وايت ستار فاتتهم بـ<strong>45 دقيقة بس!</strong> فوغ زي المعتاد ما انهارش. قرر يدور على وسيلة تانية لعبور الأطلسي.</p>
+          <p>⛵ لقى سفينة صغيرة اسمها <strong>هنريتا</strong>. القبطان رفض الأول. فوغ رشا الطاقم، سيطر على السفينة بحيلة ذكية، وبعدين <strong>حرق أخشاب السفينة كوقود</strong> عشان يسرّعوا!</p>
+          <p>🌊 عدوا الأطلسي بسرعة كبيرة وصلوا ميناء كوينستاون 20 ديسمبر.</p>
+        </div>
+        <div class="ch-highlight">
+          <h4>⭐ المهم للامتحان</h4>
+          <ul>
+            <li>فوغ أنقذ باسبارتو من السيوكس بخطة ذكية</li>
+            <li>استخدم زلاجة هوائية لعبور البراري المتجمدة</li>
+            <li>السفينة هنريتا فاتته بـ45 دقيقة في نيويورك</li>
+            <li>حرق أخشاب السفينة كوقود لتسريع العبور</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 12 -->
+    <div class="ch-card" id="ch12">
+      <div class="ch-header" onclick="toggle('ch12')">
+        <div class="ch-num c12">12</div>
+        <div class="ch-title-wrap">
+          <div class="ch-title">الفصل الثاني عشر — النهاية المذهلة! 🎉</div>
+          <div class="ch-subtitle">🇬🇧 ليفربول → لندن → نادي الإصلاح</div>
+        </div>
+        <span class="ch-arrow">▼</span>
+      </div>
+      <div class="ch-body">
+        <div class="ch-summary">
+          <p>🚉 وصلوا ليفربول وفي إيدهم <strong>9 ساعات</strong> قبل الموعد النهائي! كانوا بيكسبوا... بس!</p>
+          <p>🚔 Fix اعتقل فوغ في محطة القطار فجأة! فوغ رد بهدوءه المعتاد، وأمر باسبارتو يطيع القانون رغم غضبه وحزنه. تم حبسه في زنزانة وحده.</p>
+          <p>😢 باسبارتو وأودا انتظروا برّه مضطربين وخايفين. رغم الشكوك، ثقة باسبارتو في شرف فوغ ما اتزعزعتش أبداً.</p>
+          <p>😲 بعد شوية Fix رجع مبهوت وقال: <strong>"السارق الحقيقي لبنك إنجلترا اتمسك في برايتون!"</strong> — يعني فوغ بريء طول الوقت وFix كان غلطان!</p>
+          <p>🤝 فوغ أطلق سراح Fix من غير ما يزعل ولا يلومه! استرجع الـ<strong>2000 جنيه</strong> اللي خسرها في كلكتا والاعتراف بالمسؤولية.</p>
+          <p>🚂 ركبوا قطار خاص للندن بسرعة جنونية. وصلوا نادي الإصلاح الساعة <strong>8:44 مساءً</strong> — مكمّلاً الرحلة في <strong>79 يوم، 23 ساعة، و59 دقيقة!</strong></p>
+          <p>🔑 <strong>السر:</strong> لما عدوا خط التاريخ الدولي ناحية الشرق — <strong>كسبوا يوم كامل!</strong> ظنوا إن النهارده 21 ديسمبر بس هو في الحقيقة 20!</p>
+          <p>💍 في اليوم التالي، فوغ طلب إيد أودا — وقبلت! وتم ترتيب زفافهم، منهيين مغامرة الثمانين يومًا بسعادة.</p>
+        </div>
+        <div class="ch-highlight">
+          <h4>⭐ المهم للامتحان</h4>
+          <ul>
+            <li>Fix اعتقل فوغ في ليفربول رغم وصولهم بـ9 ساعات قبل الموعد</li>
+            <li>السارق الحقيقي اتمسك في برايتون — فوغ بريء</li>
+            <li>فوغ ما زعلش من Fix وأطلق سراحه</li>
+            <li>كسبوا يوم بسبب عبور خط التاريخ ناحية الشرق</li>
+            <li>أكمل الرحلة في 79 يوم 23 ساعة 59 دقيقة</li>
+            <li>فوغ اتجوز أودا في اليوم التالي</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-box">
+      <h3>🌟 الدرس من القصة</h3>
+      <p>فوغ كان <strong>هادي في كل المواقف الصعبة</strong>، ما استسلمش أبداً، وفي الآخر ربح مش بس الرهان — ربح حاجة أحسن منه: <strong>محبة أودا ووفاء باسبارتو!</strong><br><br>
+      <strong>"No mountain is too high"</strong> — مافيش جبل شاهق — ده اللي أثبته فوغ بشجاعته وإصراره في كل لحظة من الرحلة! 🌍</p>
+    </div>
+  </div>
+
+  <!-- ══════════ TIMELINE ══════════ -->
+  <div id="s-timeline" class="section">
+    <div class="sec-title">⏱ التايم لاين — الأحداث من أولها لآخرها</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-chapter">فصل 7 — الهند</div>
+        <div class="tl-event"><span class="tl-emoji">⚖️</span>المحكمة في كلكتا</div>
+        <div class="tl-detail">اتهام باسبارتو بدخول معبد بحذاءه. فوغ دفع كفالة 2000 جنيه وهربوا للسفينة في آخر لحظة.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--teal)"></div>
+        <div class="tl-chapter">فصل 8 — هونغ كونغ</div>
+        <div class="tl-event"><span class="tl-emoji">😈</span>Fix يخدّر باسبارتو</div>
+        <div class="tl-detail">السفينة كارناتيك فاتتهم. Fix خدّر باسبارتو. فوغ استأجر تانكادير بـ100 جنيه يومياً لشنغهاي. باسبارتو اتسب في هونغ كونغ!</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--teal)"></div>
+        <div class="tl-chapter">فصل 8 — يوكوهاما</div>
+        <div class="tl-event"><span class="tl-emoji">🎪</span>لقاء باسبارتو وسط البهلوانية</div>
+        <div class="tl-detail">فوغ لقى باسبارتو بيشتغل مع بهلوانية يابانية! اشتروا تذاكر جنرال غرانت لأمريكا.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-chapter">فصل 9 — المحيط الهادي</div>
+        <div class="tl-event"><span class="tl-emoji">🌊</span>22 يوم على البحر</div>
+        <div class="tl-detail">رحلة هادئة نسبياً. أودا بدأت تحب فوغ. Fix بقى حليف مترددًا. اصطدام بحيتان ضيّع 3 ساعات. وصول سان فرانسيسكو 3 ديسمبر.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--purple)"></div>
+        <div class="tl-chapter">فصل 10 — أمريكا</div>
+        <div class="tl-event"><span class="tl-emoji">🦬</span>جاموس وكوبري وسيوكس!</div>
+        <div class="tl-detail">3786 ميل بالقطار. جاموس سكّ السكة 3 ساعات. كوبري وقع في النهر. السيوكس هجموا وأسروا باسبارتو!</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-chapter">فصل 11 — الإنقاذ</div>
+        <div class="tl-event"><span class="tl-emoji">🛷</span>فوغ ينقذ باسبارتو</div>
+        <div class="tl-detail">فوغ راح البرية المتجمدة لإنقاذ باسبارتو. زلاجة هوائية وصلتهم أوماها. فاتتهم سفينة نيويورك بـ45 دقيقة!</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-chapter">فصل 11 — الأطلسي</div>
+        <div class="tl-event"><span class="tl-emoji">🔥</span>حرق أخشاب السفينة هنريتا</div>
+        <div class="tl-detail">فوغ رشا طاقم هنريتا وسيطر عليها. حرق الأخشاب كوقود لتسريع العبور. وصول ليفربول 20 ديسمبر.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#ffb74d)"></div>
+        <div class="tl-chapter">فصل 12 — ليفربول</div>
+        <div class="tl-event"><span class="tl-emoji">🚔</span>Fix يعتقل فوغ!</div>
+        <div class="tl-detail">Fix اعتقل فوغ رغم وصولهم بـ9 ساعات قبل الموعد. حبس فوغ بهدوء في الزنزانة.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-chapter">فصل 12 — لندن</div>
+        <div class="tl-event"><span class="tl-emoji">🎉</span>النهاية المذهلة!</div>
+        <div class="tl-detail">السارق الحقيقي اتمسك في برايتون. فوغ أُطلق سراحه. ركبوا قطار لندن. وصلوا نادي الإصلاح 8:44 مساءً. أكمل في 79 يوم 23 ساعة 59 دقيقة. فوغ اتجوز أودا! ❤️</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ EXAM QUESTIONS ══════════ -->
+  <div id="s-questions" class="section">
+    <div class="sec-title">🎯 أسئلة الامتحان المتوقعة + إجاباتها</div>
+
+    <table class="q-table">
+      <thead>
+        <tr>
+          <th>❓ السؤال</th>
+          <th>✅ الإجابة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="q-cell">Why was Fogg arrested in Calcutta?</td>
+          <td class="a-cell">Because Passepartout had entered a Hindu temple with his shoes on.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did Fogg secure their freedom in court?</td>
+          <td class="a-cell">He offered bail — he placed £2,000 on the judge's desk.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">What did Fix do to Passepartout in Hong Kong?</td>
+          <td class="a-cell">He drugged Passepartout in an opium den to delay Fogg.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did Fogg cross from Hong Kong to Shanghai?</td>
+          <td class="a-cell">He hired a small schooner called the Tankadere for £100 per day plus £200 extra.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">Why did Fix travel on Fogg's ticket across the Pacific?</td>
+          <td class="a-cell">Because the British arrest warrant would be invalid in San Francisco, so he needed Fogg to succeed to get back to England.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did Fogg react when he found out Fix was a detective?</td>
+          <td class="a-cell">He stayed calm and ignored it — he said Fix was just doing his job.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">Why did Fogg go into the wilderness in Chapter 10?</td>
+          <td class="a-cell">To rescue Passepartout who was captured by the Sioux warriors.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did they cross the snowy plains after losing the train?</td>
+          <td class="a-cell">Using a wind-sledge (a small sail-driven vehicle) that crossed the snow-covered plains rapidly.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did Fogg convince the captain of the Henrietta?</td>
+          <td class="a-cell">He bribed the crew and temporarily incapacitated the captain to take control of the ship.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">Why did Fogg burn parts of the Henrietta?</td>
+          <td class="a-cell">To conserve coal and use the wood as fuel to speed up crossing the Atlantic.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">Why did Fix arrest Fogg in Liverpool?</td>
+          <td class="a-cell">He still believed Fogg was the Bank of England robber and had a warrant for his arrest.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">What was Fix's mistake?</td>
+          <td class="a-cell">The real Bank of England robber had been caught in Brighton — Fogg was innocent all along.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did Fogg react to Fix's mistake?</td>
+          <td class="a-cell">He showed no anger and released Fix calmly, preparing for the final leg of his journey.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How did Fogg complete the journey in 79 days instead of 80?</td>
+          <td class="a-cell">By crossing the International Date Line eastward, they gained a day — so they had one extra day.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">What time did Fogg arrive at the Reform Club?</td>
+          <td class="a-cell">At 8:44 p.m. — completing the journey in 79 days, 23 hours, and 59 minutes.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">Who did Fogg marry at the end?</td>
+          <td class="a-cell">Aouda — he proposed the next day after returning to London.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">How do you think Fix feels when Fogg pays bail?</td>
+          <td class="a-cell">He feels frustrated because Fogg escapes again and the merchants arrived too late to testify.</td>
+        </tr>
+        <tr>
+          <td class="q-cell">If you were Passepartout, would you help Fix arrest Fogg? Why?</td>
+          <td class="a-cell">No, because Fogg is loyal, generous, and has shown great courage. He risked his life and money to help others. He deserves trust and loyalty in return.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="lesson-box">
+      <h3>💡 نصيحة الامتحان</h3>
+      <p>لما تيجي تجاوب على أسئلة الرواية، دايماً <strong>اذكر اسم الشخصية</strong> وبراهين من القصة. مثلاً: <em>"Fogg paid bail because he was calm and determined to continue the journey."</em> — دي إجابة كاملة وصح!</p>
+    </div>
+  </div>
+
+</div><!-- end wrapper -->
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggle(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

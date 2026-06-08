@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة ليلة الامتحان - English 2nd Secondary Term 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f1a;
+    --surface: #141726;
+    --card: #1c2035;
+    --border: #2a3050;
+    --accent: #00e5ff;
+    --gold: #ffc107;
+    --green: #00e676;
+    --red: #ff5252;
+    --purple: #ce93d8;
+    --text: #e8eaf6;
+    --text-dim: #9198b8;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .hero {
+    background: linear-gradient(135deg, #0a0c18 0%, #141726 50%, #1a1035 100%);
+    padding: 50px 20px 30px;
+    text-align: center;
+    position: relative;
+    border-bottom: 2px solid var(--accent);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,193,7,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,193,7,0.4); }
+    50%      { box-shadow: 0 0 0 8px rgba(255,193,7,0); }
+  }
+  .hero h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(1.8em, 5vw, 3em);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--text-dim); font-size: 1em; }
+
+  /* ===== NAV ===== */
+  .nav-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+
+  /* ===== SECTIONS ===== */
+  .section { display: none; padding: 24px 16px; max-width: 1200px; margin: 0 auto; }
+  .section.active { display: block; animation: fadeUp 0.3s ease; }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(12px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.6em;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .unit-label {
+    display: inline-block;
+    background: rgba(0,229,255,0.12);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    font-weight: 700;
+    margin: 18px 0 12px;
+  }
+
+  /* ===== VOCAB TABLE ===== */
+  .vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    font-size: 0.9em;
+  }
+  .vocab-table thead tr {
+    background: linear-gradient(90deg, rgba(0,229,255,0.2), rgba(206,147,216,0.15));
+  }
+  .vocab-table th {
+    padding: 12px 14px;
+    text-align: right;
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  .vocab-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .vocab-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .word-cell {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1em;
+    white-space: nowrap;
+  }
+  .arabic-cell { color: var(--gold); font-weight: 600; }
+  .syn-cell { color: var(--green); font-size: 0.88em; }
+  .ant-cell { color: var(--red); font-size: 0.88em; }
+  .type-badge {
+    display: inline-block;
+    background: rgba(206,147,216,0.2);
+    color: var(--purple);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  /* ===== GRAMMAR CARDS ===== */
+  .grammar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .g-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .g-card h3 {
+    color: var(--accent);
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .formula {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #fff;
+    margin: 8px 0;
+    direction: ltr;
+    text-align: left;
+  }
+  .formula span { color: var(--gold); }
+  .example {
+    color: var(--text-dim);
+    font-size: 0.85em;
+    font-style: italic;
+    margin-top: 8px;
+    direction: ltr;
+    text-align: left;
+    padding-right: 8px;
+    border-right: 2px solid var(--accent);
+    padding: 4px 8px;
+  }
+
+  /* ===== EXAM TYPES ===== */
+  .exam-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .exam-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .exam-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 4px; height: 100%;
+  }
+  .exam-card.type1::before { background: var(--accent); }
+  .exam-card.type2::before { background: var(--gold); }
+  .exam-card.type3::before { background: var(--green); }
+  .exam-card.type4::before { background: var(--red); }
+  .exam-card.type5::before { background: var(--purple); }
+  .exam-card.type6::before { background: #ff9800; }
+  .exam-card h3 {
+    font-size: 0.95em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .exam-card .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .tag-hot { background: rgba(255,82,82,0.2); color: var(--red); border: 1px solid var(--red); }
+  .tag-easy { background: rgba(0,230,118,0.2); color: var(--green); border: 1px solid var(--green); }
+  .exam-card ul { list-style: none; padding: 0; }
+  .exam-card li { color: var(--text-dim); font-size: 0.85em; padding: 4px 0; }
+  .exam-card li::before { content: "← "; color: var(--accent); }
+
+  /* ===== TIPS ===== */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .tip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    font-size: 1.8em;
+    flex-shrink: 0;
+  }
+  .tip-card h4 { color: var(--gold); font-size: 0.9em; margin-bottom: 5px; }
+  .tip-card p { color: var(--text-dim); font-size: 0.83em; line-height: 1.5; }
+
+  /* ===== CONFUSION NOTES ===== */
+  .confusion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .confusion-card {
+    background: var(--card);
+    border: 1px solid rgba(255,193,7,0.3);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .confusion-card h4 {
+    color: var(--gold);
+    font-size: 0.85em;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .confusion-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .conf-word {
+    color: #fff;
+    font-weight: 700;
+    min-width: 100px;
+    font-size: 0.88em;
+  }
+  .conf-mean {
+    color: var(--text-dim);
+    font-size: 0.83em;
+  }
+
+  /* ===== SEARCH ===== */
+  .search-wrap {
+    position: sticky;
+    top: 60px;
+    z-index: 90;
+    padding: 10px 0 16px;
+    background: var(--bg);
+  }
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95em;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-dim); }
+
+  /* ===== COUNTER ===== */
+  .counter-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .counter-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+  }
+  .counter-num {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 2em;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+  }
+  .counter-label { color: var(--text-dim); font-size: 0.78em; }
+
+  /* ===== PRIORITY BADGE ===== */
+  .priority {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .p-high { background: var(--red); }
+  .p-med  { background: var(--gold); }
+
+  @media (max-width: 600px) {
+    .vocab-table { font-size: 0.8em; }
+    .vocab-table th, .vocab-table td { padding: 8px; }
+    .syn-cell, .ant-cell { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">⚡ ليلة الامتحان - الآن أو لا!</div>
+  <h1>English <span>2nd Secondary</span><br>Revision Guide — Term 2</h1>
+  <p>تحليل حقيقي من كتاب ذاكرولي | Units 7 · 8 · 9 · 10</p>
+</div>
+
+<div class="nav-wrap">
+  <button class="nav-btn active" onclick="show('s-start',this)">🚀 ابدأ من هنا</button>
+  <button class="nav-btn" onclick="show('s-u7',this)">📗 Unit 7</button>
+  <button class="nav-btn" onclick="show('s-u8',this)">📘 Unit 8</button>
+  <button class="nav-btn" onclick="show('s-u9',this)">📙 Unit 9</button>
+  <button class="nav-btn" onclick="show('s-u10',this)">📕 Unit 10</button>
+  <button class="nav-btn" onclick="show('s-grammar',this)">✏️ Grammar</button>
+  <button class="nav-btn" onclick="show('s-search',this)">🔍 بحث</button>
+</div>
+
+<!-- ════════════════════════════ START ════════════════════════════ -->
+<div id="s-start" class="section active">
+  <div class="section-title">🚀 ابدأ من هنا — أهم ما تعرفه قبل الامتحان</div>
+
+  <div class="counter-row">
+    <div class="counter-box"><span class="counter-num">7</span><div class="counter-label">أنواع أسئلة</div></div>
+    <div class="counter-box"><span class="counter-num">50+</span><div class="counter-label">كلمة مهمة</div></div>
+    <div class="counter-box"><span class="counter-num">4</span><div class="counter-label">وحدات</div></div>
+    <div class="counter-box"><span class="counter-num">4</span><div class="counter-label">قواعد نحوية</div></div>
+  </div>
+
+  <div class="section-title" style="font-size:1.1em;">📋 هيكل الامتحان — كل سؤال وشكله</div>
+  <div class="exam-types">
+    <div class="exam-card type1">
+      <div class="tag tag-hot">🔥 هيجي أكيد</div>
+      <h3>السؤال 1: اختر 2 صح من 5</h3>
+      <ul>
+        <li>Synonyms (مرادفات) أو Antonyms (أضداد)</li>
+        <li>بيحتاج تعرف المعنى كويس</li>
+        <li>مثال: "passion" synonyms → enthusiasm, love</li>
+        <li>مثال: "cooperation" antonyms → conflict, opposition</li>
+      </ul>
+    </div>
+    <div class="exam-card type2">
+      <div class="tag tag-hot">🔥 هيجي أكيد</div>
+      <h3>السؤال 2: MCQ — اختيار من متعدد (a,b,c,d)</h3>
+      <ul>
+        <li>ملء فراغات بكلمات المفردات</li>
+        <li>Grammar (Modals / Conditionals)</li>
+        <li>Paragraph type (cause-effect / problem-solution)</li>
+        <li>Novel questions — Around the World in 80 Days</li>
+      </ul>
+    </div>
+    <div class="exam-card type3">
+      <div class="tag tag-hot">🔥 هيجي أكيد</div>
+      <h3>السؤال 3: Reading Comprehension</h3>
+      <ul>
+        <li>اقرأ النص أولاً وحدد الفكرة الرئيسية</li>
+        <li>الإجابات موجودة في النص — لا تخترع</li>
+        <li>انتبه لكلمة NOT / FALSE في السؤال</li>
+        <li>synonym من النص = هتلاقي الكلمة جنبها</li>
+      </ul>
+    </div>
+    <div class="exam-card type4">
+      <div class="tag tag-hot">🔥 هيجي أكيد</div>
+      <h3>السؤال 4: الترجمة</h3>
+      <ul>
+        <li>(A) ترجم من إنجليزي لعربي</li>
+        <li>(B) ترجم من عربي لإنجليزي</li>
+        <li>ركز على الكلمات اللي تغير معناها في الترجمة</li>
+        <li>استخدم المفردات المتعلمة</li>
+      </ul>
+    </div>
+    <div class="exam-card type5">
+      <div class="tag tag-easy">✅ درجات سهلة</div>
+      <h3>السؤال 5: الرواية — Novel</h3>
+      <ul>
+        <li>Around the World in Eighty Days</li>
+        <li>Phileas Fogg / Passepartout / Fix</li>
+        <li>اقرأ أسئلة الرواية من الامتحانات السابقة</li>
+      </ul>
+    </div>
+    <div class="exam-card type6">
+      <div class="tag tag-easy">✅ درجات سهلة</div>
+      <h3>السؤال 6: إعادة الصياغة</h3>
+      <ul>
+        <li>أكتب الجملة بنفس المعنى</li>
+        <li>If... / Unless / Should / Were / Had</li>
+        <li>مثال: Hala doesn't hurry → If Hala hurried...</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:1.1em;">⚡ أهم 10 نقاط تحفظها دلوقتي</div>
+  <div class="tips-grid">
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Passion = Enthusiasm = Love ≠ Indifference</h4><p>من أكتر الكلمات اللي بتيجي في السؤال الأول</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Cooperation = Teamwork ≠ Conflict = Rivalry</h4><p>ركز على المتضادات - بتيجي دايماً</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Must (ضرورة ذاتية) ≠ Have to (خارجية)</h4><p>Mustn't = حرام تعمل | Don't have to = مش لازم</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>If + Past → would (Second Conditional)</h4><p>If I were you, I would study now.</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Determination = Perseverance = Willpower</h4><p>مرادفات الإصرار — بتيجي كتير في Unit 8</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Campaign = حملة | Mediator = وسيط</h4><p>كلمات مهمة من Unit 7 هتيجي في MCQ</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Innovation = Invention ≠ Tradition</h4><p>Unit 8 — ابتكار ضد التقليد</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>Unity = Harmony ≠ Division</h4><p>Unit 9 — وحدة ضد انقسام</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>occur (غير متوقع) ≠ take place (منظم)</h4><p>من أهم الفروقات — بتيجي في MCQ</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎯</div><div><h4>موضوع الكتابة 180 كلمة</h4><p>مقدمة 3 جمل + نقاطين + خاتمة. استخدم: However, Moreover, Finally</p></div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ UNIT 7 ════════════════════════════ -->
+<div id="s-u7" class="section">
+  <div class="section-title">📗 Unit 7 — Vocabulary + Synonyms + Antonyms</div>
+
+  <div class="unit-label">🔑 Key Vocabulary — Unit 7</div>
+  <table class="vocab-table">
+    <thead>
+      <tr>
+        <th>الكلمة</th>
+        <th>النوع</th>
+        <th>المعنى</th>
+        <th style="color:var(--green)">✅ Synonyms</th>
+        <th style="color:var(--red)">❌ Antonyms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="word-cell">caring</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">مُهتم</td><td class="syn-cell">compassionate / kind</td><td class="ant-cell">uncaring / cruel</td></tr>
+      <tr><td class="word-cell">confident</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">واثق</td><td class="syn-cell">self-assured / bold</td><td class="ant-cell">hesitant / timid</td></tr>
+      <tr><td class="word-cell">conflict</td><td><span class="type-badge">n</span></td><td class="arabic-cell">نزاع / صراع</td><td class="syn-cell">clash / disagreement</td><td class="ant-cell">agreement / harmony</td></tr>
+      <tr><td class="word-cell">cooperation</td><td><span class="type-badge">n</span></td><td class="arabic-cell">تعاون</td><td class="syn-cell">teamwork / collaboration</td><td class="ant-cell">conflict / rivalry / opposition</td></tr>
+      <tr><td class="word-cell">diversity</td><td><span class="type-badge">n</span></td><td class="arabic-cell">تنوع</td><td class="syn-cell">variety / range</td><td class="ant-cell">uniformity / sameness</td></tr>
+      <tr><td class="word-cell">effective</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">فعال</td><td class="syn-cell">efficient / productive</td><td class="ant-cell">ineffective / inefficient</td></tr>
+      <tr><td class="word-cell">fairness</td><td><span class="type-badge">n</span></td><td class="arabic-cell">إنصاف / عدل</td><td class="syn-cell">justice / equality</td><td class="ant-cell">injustice / bias</td></tr>
+      <tr><td class="word-cell">gathering</td><td><span class="type-badge">n</span></td><td class="arabic-cell">تجمُّع</td><td class="syn-cell">assembly / meeting</td><td class="ant-cell">dispersal / separation</td></tr>
+      <tr><td class="word-cell">inclusive</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">شامل</td><td class="syn-cell">comprehensive / broad</td><td class="ant-cell">exclusive / limited</td></tr>
+      <tr><td class="word-cell">interrupt</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يقاطع</td><td class="syn-cell">disturb / intrude</td><td class="ant-cell">continue / allow / permit</td></tr>
+      <tr><td class="word-cell">involve</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يتضمن / يتورط</td><td class="syn-cell">include / engage</td><td class="ant-cell">exclude / separate</td></tr>
+      <tr><td class="word-cell">mediator</td><td><span class="type-badge">n</span></td><td class="arabic-cell">وسيط</td><td class="syn-cell">arbitrator / peacemaker</td><td class="ant-cell">agitator</td></tr>
+      <tr><td class="word-cell">misunderstanding</td><td><span class="type-badge">n</span></td><td class="arabic-cell">سوء فهم</td><td class="syn-cell">confusion / misconception</td><td class="ant-cell">understanding / clarity</td></tr>
+      <tr><td class="word-cell">participate</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يشارك</td><td class="syn-cell">take part / contribute</td><td class="ant-cell">withdraw / avoid</td></tr>
+      <tr><td class="word-cell">particular</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">معين / محدد</td><td class="syn-cell">specific / certain / fussy</td><td class="ant-cell">general / common</td></tr>
+      <tr><td class="word-cell">realistic</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">واقعي</td><td class="syn-cell">practical / sensible</td><td class="ant-cell">idealistic / unrealistic</td></tr>
+      <tr><td class="word-cell">resident</td><td><span class="type-badge">n</span></td><td class="arabic-cell">ساكن / مقيم</td><td class="syn-cell">inhabitant / local</td><td class="ant-cell">visitor / stranger</td></tr>
+      <tr><td class="word-cell">resolve</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يحل</td><td class="syn-cell">settle / solve</td><td class="ant-cell">worsen / complicate</td></tr>
+      <tr><td class="word-cell">treat</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يعامل</td><td class="syn-cell">handle / deal with</td><td class="ant-cell">neglect / mistreat</td></tr>
+      <tr><td class="word-cell">wisdom</td><td><span class="type-badge">n</span></td><td class="arabic-cell">حكمة</td><td class="syn-cell">insight / judgment</td><td class="ant-cell">folly / foolishness</td></tr>
+    </tbody>
+  </table>
+
+  <div class="unit-label">⚠️ الفروقات المهمة — Unit 7</div>
+  <div class="confusion-grid">
+    <div class="confusion-card">
+      <h4>notice / detect / observe</h4>
+      <div class="confusion-row"><div class="conf-word">notice</div><div class="conf-mean">يُلاحظ / يُلاحِظ (عفوياً)</div></div>
+      <div class="confusion-row"><div class="conf-word">detect</div><div class="conf-mean">يكتشف / يرصد (بجهد)</div></div>
+      <div class="confusion-row"><div class="conf-word">observe</div><div class="conf-mean">يراقب (بدقة وتأمل)</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>staff / crew / cast</h4>
+      <div class="confusion-row"><div class="conf-word">staff</div><div class="conf-mean">طاقم العمل (شركة أو مدرسة)</div></div>
+      <div class="confusion-row"><div class="conf-word">crew</div><div class="conf-mean">طاقم (سفينة أو طائرة)</div></div>
+      <div class="confusion-row"><div class="conf-word">cast</div><div class="conf-mean">طاقم الممثلين (فيلم أو مسرحية)</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>occur / take place</h4>
+      <div class="confusion-row"><div class="conf-word">occur</div><div class="conf-mean">يحدث (غير متوقع أو عفوي)</div></div>
+      <div class="confusion-row"><div class="conf-word">take place</div><div class="conf-mean">يُقام (منظم ومخطط له)</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>member / organ</h4>
+      <div class="confusion-row"><div class="conf-word">member</div><div class="conf-mean">عضو في مجموعة أو فريق</div></div>
+      <div class="confusion-row"><div class="conf-word">organ</div><div class="conf-mean">عضو في جسم الكائن الحي</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>permission / permit / licence</h4>
+      <div class="confusion-row"><div class="conf-word">permission</div><div class="conf-mean">إذن (شفهي أو ضمني)</div></div>
+      <div class="confusion-row"><div class="conf-word">permit</div><div class="conf-mean">تصريح رسمي (وثيقة)</div></div>
+      <div class="confusion-row"><div class="conf-word">licence</div><div class="conf-mean">رخصة دائمة (مهنة أو وظيفة)</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>logo / slogan</h4>
+      <div class="confusion-row"><div class="conf-word">logo</div><div class="conf-mean">شعار (رمز أو تصميم بصري)</div></div>
+      <div class="confusion-row"><div class="conf-word">slogan</div><div class="conf-mean">شعار (جملة تسويقية)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ UNIT 8 ════════════════════════════ -->
+<div id="s-u8" class="section">
+  <div class="section-title">📘 Unit 8 — Vocabulary + Synonyms + Antonyms</div>
+
+  <div class="unit-label">🔑 Key Vocabulary — Unit 8</div>
+  <table class="vocab-table">
+    <thead>
+      <tr>
+        <th>الكلمة</th>
+        <th>النوع</th>
+        <th>المعنى</th>
+        <th style="color:var(--green)">✅ Synonyms</th>
+        <th style="color:var(--red)">❌ Antonyms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="word-cell">brilliant</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">رائع / متألق</td><td class="syn-cell">talented / exceptional</td><td class="ant-cell">dull / unremarkable</td></tr>
+      <tr><td class="word-cell">campaign</td><td><span class="type-badge">n</span></td><td class="arabic-cell">حملة</td><td class="syn-cell">initiative / project</td><td class="ant-cell">inaction</td></tr>
+      <tr><td class="word-cell">courage</td><td><span class="type-badge">n</span></td><td class="arabic-cell">الشجاعة</td><td class="syn-cell">bravery / boldness</td><td class="ant-cell">cowardice / fear</td></tr>
+      <tr><td class="word-cell">curiosity</td><td><span class="type-badge">n</span></td><td class="arabic-cell">فضول</td><td class="syn-cell">interest / nosiness</td><td class="ant-cell">disinterest / indifference</td></tr>
+      <tr><td class="word-cell">determination</td><td><span class="type-badge">n</span></td><td class="arabic-cell">العزيمة / إصرار</td><td class="syn-cell">perseverance / willpower</td><td class="ant-cell">hesitation / weakness</td></tr>
+      <tr><td class="word-cell">empathy</td><td><span class="type-badge">n</span></td><td class="arabic-cell">تعاطف</td><td class="syn-cell">compassion / sympathy</td><td class="ant-cell">indifference / insensitivity</td></tr>
+      <tr><td class="word-cell">endangered</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">معرض للخطر</td><td class="syn-cell">threatened / at risk</td><td class="ant-cell">safe / protected / secure</td></tr>
+      <tr><td class="word-cell">enthusiasm</td><td><span class="type-badge">n</span></td><td class="arabic-cell">حماس</td><td class="syn-cell">excitement / eagerness</td><td class="ant-cell">disinterest / lethargy</td></tr>
+      <tr><td class="word-cell">filter</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يرشح / ينقي</td><td class="syn-cell">purify / refine</td><td class="ant-cell">contaminate / pollute</td></tr>
+      <tr><td class="word-cell">hesitation</td><td><span class="type-badge">n</span></td><td class="arabic-cell">تردد</td><td class="syn-cell">uncertainty / doubt</td><td class="ant-cell">confidence / certainty</td></tr>
+      <tr><td class="word-cell">hinder</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يعيق / يعوق</td><td class="syn-cell">obstruct / block</td><td class="ant-cell">assist / facilitate</td></tr>
+      <tr><td class="word-cell">innovation</td><td><span class="type-badge">n</span></td><td class="arabic-cell">ابتكار</td><td class="syn-cell">invention / creativity</td><td class="ant-cell">tradition / imitation</td></tr>
+      <tr><td class="word-cell">inspiring</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">ملهم</td><td class="syn-cell">motivating / encouraging</td><td class="ant-cell">discouraging / depressing</td></tr>
+      <tr><td class="word-cell">meaningful</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">ذو مغزى</td><td class="syn-cell">significant / valuable</td><td class="ant-cell">meaningless / worthless</td></tr>
+      <tr><td class="word-cell">mentorship</td><td><span class="type-badge">n</span></td><td class="arabic-cell">توجيه / إرشاد</td><td class="syn-cell">guidance / coaching</td><td class="ant-cell">neglect / abandonment</td></tr>
+      <tr><td class="word-cell">obstacle</td><td><span class="type-badge">n</span></td><td class="arabic-cell">عقبة / عائق</td><td class="syn-cell">barrier / hindrance</td><td class="ant-cell">opportunity / advantage</td></tr>
+      <tr><td class="word-cell">overcome</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يتغلب على</td><td class="syn-cell">conquer / defeat</td><td class="ant-cell">surrender / yield / give in</td></tr>
+      <tr><td class="word-cell">passion</td><td><span class="type-badge">n</span></td><td class="arabic-cell">شغف</td><td class="syn-cell">enthusiasm / excitement</td><td class="ant-cell">indifference / disinterest</td></tr>
+      <tr><td class="word-cell">passionate</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">شغوف / متحمس</td><td class="syn-cell">ardent / enthusiastic</td><td class="ant-cell">apathetic / indifferent</td></tr>
+      <tr><td class="word-cell">perseverance</td><td><span class="type-badge">n</span></td><td class="arabic-cell">مثابرة / إصرار</td><td class="syn-cell">determination / persistence</td><td class="ant-cell">surrender / laziness</td></tr>
+      <tr><td class="word-cell">persistence</td><td><span class="type-badge">n</span></td><td class="arabic-cell">مثابرة</td><td class="syn-cell">determination / perseverance</td><td class="ant-cell">surrender / quitting</td></tr>
+      <tr><td class="word-cell">praise</td><td><span class="type-badge">v/n</span></td><td class="arabic-cell">يمدح</td><td class="syn-cell">applaud / admire</td><td class="ant-cell">criticize / condemn</td></tr>
+      <tr><td class="word-cell">recognition</td><td><span class="type-badge">n</span></td><td class="arabic-cell">اعتراف / تقدير</td><td class="syn-cell">appreciation / credit</td><td class="ant-cell">disregard / ignorance</td></tr>
+      <tr><td class="word-cell">teamwork</td><td><span class="type-badge">n</span></td><td class="arabic-cell">عمل جماعي</td><td class="syn-cell">cooperation / collaboration</td><td class="ant-cell">individual work / rivalry</td></tr>
+    </tbody>
+  </table>
+
+  <div class="unit-label">⚠️ الفروقات المهمة — Unit 8</div>
+  <div class="confusion-grid">
+    <div class="confusion-card">
+      <h4>error / mistake / misprint</h4>
+      <div class="confusion-row"><div class="conf-word">error</div><div class="conf-mean">خطأ فني / في نظام أو حساب</div></div>
+      <div class="confusion-row"><div class="conf-word">mistake</div><div class="conf-mean">خطأ في فعل أو رأي</div></div>
+      <div class="confusion-row"><div class="conf-word">misprint</div><div class="conf-mean">خطأ مطبعي في مطبوعات</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>mentor / guardian</h4>
+      <div class="confusion-row"><div class="conf-word">mentor</div><div class="conf-mean">مرشد للنمو الشخصي أو المهني</div></div>
+      <div class="confusion-row"><div class="conf-word">guardian</div><div class="conf-mean">وصي / للرعاية والحماية القانونية</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>public / general</h4>
+      <div class="confusion-row"><div class="conf-word">public</div><div class="conf-mean">عام (ملكوس أو يصلح للجمهور)</div></div>
+      <div class="confusion-row"><div class="conf-word">general</div><div class="conf-mean">عام (شائع أو غير محدد)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ UNIT 9 ════════════════════════════ -->
+<div id="s-u9" class="section">
+  <div class="section-title">📙 Unit 9 — Vocabulary + Synonyms + Antonyms</div>
+
+  <div class="unit-label">🔑 Key Vocabulary — Unit 9</div>
+  <table class="vocab-table">
+    <thead>
+      <tr>
+        <th>الكلمة</th>
+        <th>النوع</th>
+        <th>المعنى</th>
+        <th style="color:var(--green)">✅ Synonyms</th>
+        <th style="color:var(--red)">❌ Antonyms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="word-cell">admire</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يُعجب / يقدر</td><td class="syn-cell">respect / appreciate</td><td class="ant-cell">despise / scorn</td></tr>
+      <tr><td class="word-cell">approval</td><td><span class="type-badge">n</span></td><td class="arabic-cell">مُوافَقة</td><td class="syn-cell">consent / agreement</td><td class="ant-cell">disapproval / rejection</td></tr>
+      <tr><td class="word-cell">argument</td><td><span class="type-badge">n</span></td><td class="arabic-cell">جِدَال / حُجَّة</td><td class="syn-cell">debate / discussion / dispute</td><td class="ant-cell">agreement / harmony</td></tr>
+      <tr><td class="word-cell">awareness</td><td><span class="type-badge">n</span></td><td class="arabic-cell">وَعْي</td><td class="syn-cell">knowledge / consciousness</td><td class="ant-cell">ignorance / unawareness</td></tr>
+      <tr><td class="word-cell">ban</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يَحْظُر / يَمْنَع</td><td class="syn-cell">prohibit / forbid / restrict</td><td class="ant-cell">allow / permit</td></tr>
+      <tr><td class="word-cell">compassion</td><td><span class="type-badge">n</span></td><td class="arabic-cell">تعاطف / رحمة</td><td class="syn-cell">empathy / kindness</td><td class="ant-cell">cruelty / harshness</td></tr>
+      <tr><td class="word-cell">decoration</td><td><span class="type-badge">n</span></td><td class="arabic-cell">زِينة / زَخرفة</td><td class="syn-cell">ornament / embellishment</td><td class="ant-cell">simplicity / plainness</td></tr>
+      <tr><td class="word-cell">equality</td><td><span class="type-badge">n</span></td><td class="arabic-cell">مُساوَاة</td><td class="syn-cell">fairness / justice</td><td class="ant-cell">inequality / bias</td></tr>
+      <tr><td class="word-cell">heal</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يشفى</td><td class="syn-cell">cure / mend</td><td class="ant-cell">harm / damage</td></tr>
+      <tr><td class="word-cell">inspire</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يُلهم / يحفز</td><td class="syn-cell">motivate / encourage</td><td class="ant-cell">discourage / demoralize</td></tr>
+      <tr><td class="word-cell">inspiring</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">ملهم</td><td class="syn-cell">motivating / encouraging</td><td class="ant-cell">demotivating / discouraging</td></tr>
+      <tr><td class="word-cell">invade</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يغزو</td><td class="syn-cell">occupy / conquer</td><td class="ant-cell">retreat / withdraw</td></tr>
+      <tr><td class="word-cell">invisible</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">غير مرئي / خفي</td><td class="syn-cell">unseen / hidden</td><td class="ant-cell">visible / obvious</td></tr>
+      <tr><td class="word-cell">memorable</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">خالِد / لا يُنسى</td><td class="syn-cell">unforgettable / remarkable</td><td class="ant-cell">forgettable / unremarkable</td></tr>
+      <tr><td class="word-cell">permanent</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">دائِم / مُستَديم</td><td class="syn-cell">lasting / enduring / stable</td><td class="ant-cell">temporary / transient</td></tr>
+      <tr><td class="word-cell">promote</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يُعَزِّز / يُرَوِّج</td><td class="syn-cell">advance / support / encourage</td><td class="ant-cell">hinder / suppress</td></tr>
+      <tr><td class="word-cell">react</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يتفاعل</td><td class="syn-cell">respond / reply</td><td class="ant-cell">ignore / overlook</td></tr>
+      <tr><td class="word-cell">respect</td><td><span class="type-badge">n/v</span></td><td class="arabic-cell">احترام / يحترم</td><td class="syn-cell">honor / admiration</td><td class="ant-cell">disrespect / contempt</td></tr>
+      <tr><td class="word-cell">scary</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">مخيف / مرعب</td><td class="syn-cell">frightening / terrifying</td><td class="ant-cell">calming / soothing</td></tr>
+      <tr><td class="word-cell">unity</td><td><span class="type-badge">n</span></td><td class="arabic-cell">وحدة / اتحاد</td><td class="syn-cell">harmony / solidarity</td><td class="ant-cell">division / separation</td></tr>
+      <tr><td class="word-cell">universal</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">عالَمي / شامل</td><td class="syn-cell">global / widespread</td><td class="ant-cell">limited / local / specific</td></tr>
+    </tbody>
+  </table>
+
+  <div class="unit-label">⚠️ الفروقات المهمة — Unit 9</div>
+  <div class="confusion-grid">
+    <div class="confusion-card">
+      <h4>gesture / sign / signal</h4>
+      <div class="confusion-row"><div class="conf-word">gesture</div><div class="conf-mean">إيماءة / حركة جسدية تعبر عن شعور</div></div>
+      <div class="confusion-row"><div class="conf-word">sign</div><div class="conf-mean">علامة / إشارة ثابتة أو لافتة</div></div>
+      <div class="confusion-row"><div class="conf-word">signal</div><div class="conf-mean">إشارة للإبلاغ (صوت أو ضوء أو أمر)</div></div>
+    </div>
+    <div class="confusion-card">
+      <h4>legend / myth / fable</h4>
+      <div class="confusion-row"><div class="conf-word">legend</div><div class="conf-mean">أسطورة تعتمد على حقائق مع مبالغة</div></div>
+      <div class="confusion-row"><div class="conf-word">myth</div><div class="conf-mean">أسطورة لا تعتمد على حقائق</div></div>
+      <div class="confusion-row"><div class="conf-word">fable</div><div class="conf-mean">قصة بحيوانات تحمل درساً</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ UNIT 10 ════════════════════════════ -->
+<div id="s-u10" class="section">
+  <div class="section-title">📕 Unit 10 — Vocabulary + Synonyms + Antonyms</div>
+
+  <div class="unit-label">🔑 Key Vocabulary — Unit 10</div>
+  <table class="vocab-table">
+    <thead>
+      <tr>
+        <th>الكلمة</th>
+        <th>النوع</th>
+        <th>المعنى</th>
+        <th style="color:var(--green)">✅ Synonyms</th>
+        <th style="color:var(--red)">❌ Antonyms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="word-cell">balance</td><td><span class="type-badge">n/v</span></td><td class="arabic-cell">توازن</td><td class="syn-cell">stability / equality</td><td class="ant-cell">imbalance / disorder</td></tr>
+      <tr><td class="word-cell">competition</td><td><span class="type-badge">n</span></td><td class="arabic-cell">منافسة</td><td class="syn-cell">contest / rivalry</td><td class="ant-cell">cooperation / teamwork</td></tr>
+      <tr><td class="word-cell">confusing</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">مُريك</td><td class="syn-cell">unclear / puzzling</td><td class="ant-cell">clear / understandable</td></tr>
+      <tr><td class="word-cell">customize</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يُخَصِّص</td><td class="syn-cell">personalize / adapt</td><td class="ant-cell">standardize / fix</td></tr>
+      <tr><td class="word-cell">deadline</td><td><span class="type-badge">n</span></td><td class="arabic-cell">الموعد النهائي</td><td class="syn-cell">due date / time limit</td><td class="ant-cell">extension / delay</td></tr>
+      <tr><td class="word-cell">difficulty</td><td><span class="type-badge">n</span></td><td class="arabic-cell">صعوبة</td><td class="syn-cell">problem / challenge</td><td class="ant-cell">ease / simplicity</td></tr>
+      <tr><td class="word-cell">discourage</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يُحبِط / يُثَبِّط</td><td class="syn-cell">prevent / demotivate</td><td class="ant-cell">encourage / support</td></tr>
+      <tr><td class="word-cell">earn</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يكسب</td><td class="syn-cell">gain / make</td><td class="ant-cell">lose / spend</td></tr>
+      <tr><td class="word-cell">enjoyment</td><td><span class="type-badge">n</span></td><td class="arabic-cell">متعة</td><td class="syn-cell">pleasure / happiness</td><td class="ant-cell">boredom / sadness</td></tr>
+      <tr><td class="word-cell">growth</td><td><span class="type-badge">n</span></td><td class="arabic-cell">نمو</td><td class="syn-cell">expansion / increase</td><td class="ant-cell">decline / decrease</td></tr>
+      <tr><td class="word-cell">income</td><td><span class="type-badge">n</span></td><td class="arabic-cell">دخل</td><td class="syn-cell">earnings / salary</td><td class="ant-cell">outcome / expense</td></tr>
+      <tr><td class="word-cell">intense</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">مكثف</td><td class="syn-cell">strong / powerful / profound</td><td class="ant-cell">mild / weak</td></tr>
+      <tr><td class="word-cell">patience</td><td><span class="type-badge">n</span></td><td class="arabic-cell">صبر</td><td class="syn-cell">calmness / tolerance</td><td class="ant-cell">impatience / frustration</td></tr>
+      <tr><td class="word-cell">realize</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يدرك</td><td class="syn-cell">understand / notice</td><td class="ant-cell">ignore / misunderstand</td></tr>
+      <tr><td class="word-cell">reduce</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يقلل</td><td class="syn-cell">decrease / lower</td><td class="ant-cell">increase / raise</td></tr>
+      <tr><td class="word-cell">relax</td><td><span class="type-badge">v</span></td><td class="arabic-cell">يسترخي</td><td class="syn-cell">rest / calm down</td><td class="ant-cell">stress / worry</td></tr>
+      <tr><td class="word-cell">repetitive</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">متكرر</td><td class="syn-cell">repeated / recurring</td><td class="ant-cell">varied / different</td></tr>
+      <tr><td class="word-cell">simple</td><td><span class="type-badge">adj</span></td><td class="arabic-cell">بسيط</td><td class="syn-cell">easy / clear</td><td class="ant-cell">difficult / complex</td></tr>
+      <tr><td class="word-cell">struggle</td><td><span class="type-badge">v/n</span></td><td class="arabic-cell">يكافح</td><td class="syn-cell">fight / strive</td><td class="ant-cell">procrastinate / give up</td></tr>
+      <tr><td class="word-cell">supplies</td><td><span class="type-badge">n</span></td><td class="arabic-cell">مستلزمات</td><td class="syn-cell">materials / equipment</td><td class="ant-cell">shortage / lack</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════ GRAMMAR ════════════════════════════ -->
+<div id="s-grammar" class="section">
+  <div class="section-title">✏️ Grammar — القواعد النحوية</div>
+
+  <div class="unit-label">Unit 7 — Conditionals (الجمل الشرطية)</div>
+  <div class="grammar-grid">
+    <div class="g-card">
+      <h3>1st Conditional — المستقبل المحتمل</h3>
+      <div class="formula">If + <span>Present Simple</span>, will + Verb</div>
+      <div class="example">If you study hard, you will pass.</div>
+      <div class="example">If it rains, we will stay home.</div>
+    </div>
+    <div class="g-card">
+      <h3>2nd Conditional — غير واقعي (الحاضر)</h3>
+      <div class="formula">If + <span>Past Simple</span>, would/could/might + Verb</div>
+      <div class="example">If I were a bird, I could fly.</div>
+      <div class="example">If I were you, I'd help him.</div>
+    </div>
+    <div class="g-card">
+      <h3>3rd Conditional — ماضٍ لم يحدث</h3>
+      <div class="formula">If + <span>had + P.P.</span>, would/could/might + have + P.P.</div>
+      <div class="example">If they had known, they would have visited.</div>
+      <div class="example">Had you finished early, you'd have watched the film.</div>
+    </div>
+    <div class="g-card">
+      <h3>بدائل If — Alternatives</h3>
+      <div class="formula"><span>Unless</span> = If not (لو لم يكن)</div>
+      <div class="example">I can't buy it unless I have money.</div>
+      <div class="formula"><span>Provided / As long as</span> = بشرط أن</div>
+      <div class="example">He can play provided he finishes first.</div>
+      <div class="formula"><span>Without</span> + n/v.ing</div>
+      <div class="example">You won't succeed without studying.</div>
+      <div class="formula"><span>But for</span> + Noun</div>
+      <div class="example">But for doctors, we might die.</div>
+    </div>
+    <div class="g-card">
+      <h3>تحويلات الجمل الشرطية</h3>
+      <div class="formula"><span>Should</span> + Subject + Inf. → 1st</div>
+      <div class="example">Should you take this medicine, you'll feel better.</div>
+      <div class="formula"><span>Were</span> + Subject + to Inf. → 2nd</div>
+      <div class="example">Were he to travel, he'd be sad.</div>
+      <div class="formula"><span>Had</span> + Subject + P.P. → 3rd</div>
+      <div class="example">Had you finished early, you'd have watched the film.</div>
+    </div>
+  </div>
+
+  <div class="unit-label">Unit 8 — Modal Verbs (الأفعال الناقصة)</div>
+  <div class="grammar-grid">
+    <div class="g-card">
+      <h3>Necessity — الضرورة ✅</h3>
+      <div class="formula"><span>Must</span> — ضرورة ذاتية من نفسك</div>
+      <div class="example">I must buy a gift (أنا اللي قرر).</div>
+      <div class="formula"><span>Have to / Has to</span> — ضرورة خارجية</div>
+      <div class="example">I have to wait (الدكتور لم يأت بعد).</div>
+      <div class="formula"><span>Had to</span> — ماضي Have to</div>
+      <div class="example">He had to find a job to support his family.</div>
+    </div>
+    <div class="g-card">
+      <h3>Prohibition — الحظر ❌</h3>
+      <div class="formula"><span>Mustn't</span> — حرام / ممنوع</div>
+      <div class="example">You mustn't drive fast. (ممنوع)</div>
+      <div class="formula"><span>You mustn't smoke</span> in hospitals.</div>
+      <div class="example">It's against the law.</div>
+    </div>
+    <div class="g-card">
+      <h3>Lack of Necessity — عدم الضرورة</h3>
+      <div class="formula"><span>Don't / Doesn't have to</span> — مش لازم</div>
+      <div class="example">She doesn't have to buy many dresses.</div>
+      <div class="formula"><span>Needn't</span> — لا ضرورة (وقت الكلام)</div>
+      <div class="example">You needn't hurry.</div>
+      <div class="formula"><span>Didn't have to</span> — لم يكن ضرورياً ولم يفعله</div>
+      <div class="formula"><span>Needn't have + P.P.</span> — فعله لكن لم يكن لازم</div>
+    </div>
+    <div class="g-card">
+      <h3>Advice — النصيحة 💡</h3>
+      <div class="formula"><span>Should / Ought to</span> + Verb</div>
+      <div class="example">You should study harder.</div>
+      <div class="example">You ought to listen carefully.</div>
+      <div class="formula"><span>Shouldn't</span> = نصيحة بعدم الفعل</div>
+      <div class="example">You shouldn't eat junk food.</div>
+    </div>
+    <div class="g-card">
+      <h3>⚠️ الفرق المهم: Must vs Have to vs Mustn't vs Don't have to</h3>
+      <div style="margin-top:8px;">
+        <div style="color:var(--green);font-size:.85em;margin-bottom:6px;"><strong>Must</strong> = يجب (ضرورة ذاتية قوية)</div>
+        <div style="color:var(--green);font-size:.85em;margin-bottom:6px;"><strong>Have to</strong> = يجب (من الخارج)</div>
+        <div style="color:var(--red);font-size:.85em;margin-bottom:6px;"><strong>Mustn't</strong> = لا يجوز / حرام تفعل</div>
+        <div style="color:var(--gold);font-size:.85em;"><strong>Don't have to</strong> = لست مضطراً (مش لازم لكن ممكن)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="unit-label">🔁 Rewriting Sentences — إعادة الصياغة</div>
+  <div class="grammar-grid">
+    <div class="g-card">
+      <h3>جمل الاحتمال (If)</h3>
+      <div class="example">Hala doesn't hurry. (If...)<br>→ If Hala hurried, she would catch the train.</div>
+      <div class="example">People aren't allowed to smoke here. (mustn't)<br>→ People mustn't smoke here.</div>
+    </div>
+    <div class="g-card">
+      <h3>Should / Were / Had</h3>
+      <div class="example">If you take this medicine → Should you take this medicine...</div>
+      <div class="example">If I were you → Were I you, I wouldn't...</div>
+      <div class="example">If he had known → Had he known...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ SEARCH ════════════════════════════ -->
+<div id="s-search" class="section">
+  <div class="section-title">🔍 ابحث عن أي كلمة</div>
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchBox" placeholder="اكتب الكلمة بالإنجليزي أو العربي..." oninput="doSearch()">
+  </div>
+  <div id="searchResults"></div>
+</div>
+
+<script>
+  // ======= ALL WORDS DATA =======
+  const allWords = [
+    // Unit 7
+    {u:'Unit 7',w:'caring',t:'adj',ar:'مُهتم',syn:'compassionate / kind',ant:'uncaring / cruel'},
+    {u:'Unit 7',w:'confident',t:'adj',ar:'واثق',syn:'self-assured / bold',ant:'hesitant / timid'},
+    {u:'Unit 7',w:'conflict',t:'n',ar:'نزاع / صراع',syn:'clash / disagreement',ant:'agreement / harmony'},
+    {u:'Unit 7',w:'cooperation',t:'n',ar:'تعاون',syn:'teamwork / collaboration',ant:'conflict / rivalry / opposition'},
+    {u:'Unit 7',w:'diversity',t:'n',ar:'تنوع',syn:'variety / range',ant:'uniformity / sameness'},
+    {u:'Unit 7',w:'effective',t:'adj',ar:'فعال',syn:'efficient / productive',ant:'ineffective / inefficient'},
+    {u:'Unit 7',w:'fairness',t:'n',ar:'إنصاف / عدل',syn:'justice / equality',ant:'injustice / bias'},
+    {u:'Unit 7',w:'gathering',t:'n',ar:'تجمُّع',syn:'assembly / meeting',ant:'dispersal / separation'},
+    {u:'Unit 7',w:'inclusive',t:'adj',ar:'شامل',syn:'comprehensive / broad',ant:'exclusive / limited'},
+    {u:'Unit 7',w:'interrupt',t:'v',ar:'يقاطع',syn:'disturb / intrude',ant:'continue / allow / permit'},
+    {u:'Unit 7',w:'involve',t:'v',ar:'يتضمن / يتورط',syn:'include / engage',ant:'exclude / separate'},
+    {u:'Unit 7',w:'mediator',t:'n',ar:'وسيط',syn:'arbitrator / peacemaker',ant:'agitator'},
+    {u:'Unit 7',w:'misunderstanding',t:'n',ar:'سوء فهم',syn:'confusion / misconception',ant:'understanding / clarity'},
+    {u:'Unit 7',w:'participate',t:'v',ar:'يشارك',syn:'take part / contribute',ant:'withdraw / avoid'},
+    {u:'Unit 7',w:'particular',t:'adj',ar:'معين / محدد',syn:'specific / certain / fussy',ant:'general / common'},
+    {u:'Unit 7',w:'realistic',t:'adj',ar:'واقعي',syn:'practical / sensible',ant:'idealistic / unrealistic'},
+    {u:'Unit 7',w:'resident',t:'n',ar:'ساكن / مقيم',syn:'inhabitant / local',ant:'visitor / stranger'},
+    {u:'Unit 7',w:'resolve',t:'v',ar:'يحل',syn:'settle / solve',ant:'worsen / complicate'},
+    {u:'Unit 7',w:'treat',t:'v',ar:'يعامل',syn:'handle / deal with',ant:'neglect / mistreat'},
+    {u:'Unit 7',w:'wisdom',t:'n',ar:'حكمة',syn:'insight / judgment',ant:'folly / foolishness'},
+    // Unit 8
+    {u:'Unit 8',w:'brilliant',t:'adj',ar:'رائع / متألق',syn:'talented / exceptional',ant:'dull / unremarkable'},
+    {u:'Unit 8',w:'campaign',t:'n',ar:'حملة',syn:'initiative / project',ant:'inaction'},
+    {u:'Unit 8',w:'courage',t:'n',ar:'الشجاعة',syn:'bravery / boldness',ant:'cowardice / fear'},
+    {u:'Unit 8',w:'curiosity',t:'n',ar:'فضول',syn:'interest / nosiness',ant:'disinterest / indifference'},
+    {u:'Unit 8',w:'determination',t:'n',ar:'العزيمة / إصرار',syn:'perseverance / willpower',ant:'hesitation / weakness'},
+    {u:'Unit 8',w:'empathy',t:'n',ar:'تعاطف',syn:'compassion / sympathy',ant:'indifference / insensitivity'},
+    {u:'Unit 8',w:'endangered',t:'adj',ar:'معرض للخطر',syn:'threatened / at risk',ant:'safe / protected / secure'},
+    {u:'Unit 8',w:'enthusiasm',t:'n',ar:'حماس',syn:'excitement / eagerness',ant:'disinterest / lethargy'},
+    {u:'Unit 8',w:'filter',t:'v',ar:'يرشح / ينقي',syn:'purify / refine',ant:'contaminate / pollute'},
+    {u:'Unit 8',w:'hesitation',t:'n',ar:'تردد',syn:'uncertainty / doubt',ant:'confidence / certainty'},
+    {u:'Unit 8',w:'hinder',t:'v',ar:'يعيق / يعوق',syn:'obstruct / block',ant:'assist / facilitate'},
+    {u:'Unit 8',w:'innovation',t:'n',ar:'ابتكار',syn:'invention / creativity',ant:'tradition / imitation'},
+    {u:'Unit 8',w:'inspiring',t:'adj',ar:'ملهم',syn:'motivating / encouraging',ant:'discouraging / depressing'},
+    {u:'Unit 8',w:'meaningful',t:'adj',ar:'ذو مغزى',syn:'significant / valuable',ant:'meaningless / worthless'},
+    {u:'Unit 8',w:'mentorship',t:'n',ar:'توجيه / إرشاد',syn:'guidance / coaching',ant:'neglect / abandonment'},
+    {u:'Unit 8',w:'obstacle',t:'n',ar:'عقبة / عائق',syn:'barrier / hindrance',ant:'opportunity / advantage'},
+    {u:'Unit 8',w:'overcome',t:'v',ar:'يتغلب على',syn:'conquer / defeat',ant:'surrender / yield / give in'},
+    {u:'Unit 8',w:'passion',t:'n',ar:'شغف',syn:'enthusiasm / excitement',ant:'indifference / disinterest'},
+    {u:'Unit 8',w:'passionate',t:'adj',ar:'شغوف / متحمس',syn:'ardent / enthusiastic',ant:'apathetic / indifferent'},
+    {u:'Unit 8',w:'perseverance',t:'n',ar:'مثابرة / إصرار',syn:'determination / persistence',ant:'surrender / laziness'},
+    {u:'Unit 8',w:'persistence',t:'n',ar:'مثابرة',syn:'determination / perseverance',ant:'surrender / quitting'},
+    {u:'Unit 8',w:'praise',t:'v/n',ar:'يمدح',syn:'applaud / admire',ant:'criticize / condemn'},
+    {u:'Unit 8',w:'recognition',t:'n',ar:'اعتراف / تقدير',syn:'appreciation / credit',ant:'disregard / ignorance'},
+    {u:'Unit 8',w:'teamwork',t:'n',ar:'عمل جماعي',syn:'cooperation / collaboration',ant:'individual work / rivalry'},
+    // Unit 9
+    {u:'Unit 9',w:'admire',t:'v',ar:'يُعجب / يقدر',syn:'respect / appreciate',ant:'despise / scorn'},
+    {u:'Unit 9',w:'approval',t:'n',ar:'مُوافَقة',syn:'consent / agreement',ant:'disapproval / rejection'},
+    {u:'Unit 9',w:'argument',t:'n',ar:'جِدَال / حُجَّة',syn:'debate / discussion / dispute',ant:'agreement / harmony'},
+    {u:'Unit 9',w:'awareness',t:'n',ar:'وَعْي',syn:'knowledge / consciousness',ant:'ignorance / unawareness'},
+    {u:'Unit 9',w:'ban',t:'v',ar:'يَحْظُر / يَمْنَع',syn:'prohibit / forbid / restrict',ant:'allow / permit'},
+    {u:'Unit 9',w:'compassion',t:'n',ar:'تعاطف / رحمة',syn:'empathy / kindness',ant:'cruelty / harshness'},
+    {u:'Unit 9',w:'decoration',t:'n',ar:'زِينة / زَخرفة',syn:'ornament / embellishment',ant:'simplicity / plainness'},
+    {u:'Unit 9',w:'equality',t:'n',ar:'مُساوَاة',syn:'fairness / justice',ant:'inequality / bias'},
+    {u:'Unit 9',w:'heal',t:'v',ar:'يشفى',syn:'cure / mend',ant:'harm / damage'},
+    {u:'Unit 9',w:'inspire',t:'v',ar:'يُلهم / يحفز',syn:'motivate / encourage',ant:'discourage / demoralize'},
+    {u:'Unit 9',w:'invade',t:'v',ar:'يغزو',syn:'occupy / conquer',ant:'retreat / withdraw'},
+    {u:'Unit 9',w:'invisible',t:'adj',ar:'غير مرئي / خفي',syn:'unseen / hidden',ant:'visible / obvious'},
+    {u:'Unit 9',w:'memorable',t:'adj',ar:'خالِد / لا يُنسى',syn:'unforgettable / remarkable',ant:'forgettable / unremarkable'},
+    {u:'Unit 9',w:'permanent',t:'adj',ar:'دائِم / مُستَديم',syn:'lasting / enduring / stable',ant:'temporary / transient'},
+    {u:'Unit 9',w:'promote',t:'v',ar:'يُعَزِّز / يُرَوِّج',syn:'advance / support / encourage',ant:'hinder / suppress'},
+    {u:'Unit 9',w:'react',t:'v',ar:'يتفاعل',syn:'respond / reply',ant:'ignore / overlook'},
+    {u:'Unit 9',w:'respect',t:'n/v',ar:'احترام / يحترم',syn:'honor / admiration',ant:'disrespect / contempt'},
+    {u:'Unit 9',w:'scary',t:'adj',ar:'مخيف / مرعب',syn:'frightening / terrifying',ant:'calming / soothing'},
+    {u:'Unit 9',w:'unity',t:'n',ar:'وحدة / اتحاد',syn:'harmony / solidarity',ant:'division / separation'},
+    {u:'Unit 9',w:'universal',t:'adj',ar:'عالَمي / شامل',syn:'global / widespread',ant:'limited / local / specific'},
+    // Unit 10
+    {u:'Unit 10',w:'balance',t:'n/v',ar:'توازن',syn:'stability / equality',ant:'imbalance / disorder'},
+    {u:'Unit 10',w:'competition',t:'n',ar:'منافسة',syn:'contest / rivalry',ant:'cooperation / teamwork'},
+    {u:'Unit 10',w:'confusing',t:'adj',ar:'مُريك',syn:'unclear / puzzling',ant:'clear / understandable'},
+    {u:'Unit 10',w:'customize',t:'v',ar:'يُخَصِّص',syn:'personalize / adapt',ant:'standardize / fix'},
+    {u:'Unit 10',w:'deadline',t:'n',ar:'الموعد النهائي',syn:'due date / time limit',ant:'extension / delay'},
+    {u:'Unit 10',w:'difficulty',t:'n',ar:'صعوبة',syn:'problem / challenge',ant:'ease / simplicity'},
+    {u:'Unit 10',w:'discourage',t:'v',ar:'يُحبِط / يُثَبِّط',syn:'prevent / demotivate',ant:'encourage / support'},
+    {u:'Unit 10',w:'earn',t:'v',ar:'يكسب',syn:'gain / make',ant:'lose / spend'},
+    {u:'Unit 10',w:'enjoyment',t:'n',ar:'متعة',syn:'pleasure / happiness',ant:'boredom / sadness'},
+    {u:'Unit 10',w:'growth',t:'n',ar:'نمو',syn:'expansion / increase',ant:'decline / decrease'},
+    {u:'Unit 10',w:'income',t:'n',ar:'دخل',syn:'earnings / salary',ant:'outcome / expense'},
+    {u:'Unit 10',w:'intense',t:'adj',ar:'مكثف',syn:'strong / powerful / profound',ant:'mild / weak'},
+    {u:'Unit 10',w:'patience',t:'n',ar:'صبر',syn:'calmness / tolerance',ant:'impatience / frustration'},
+    {u:'Unit 10',w:'realize',t:'v',ar:'يدرك',syn:'understand / notice',ant:'ignore / misunderstand'},
+    {u:'Unit 10',w:'reduce',t:'v',ar:'يقلل',syn:'decrease / lower',ant:'increase / raise'},
+    {u:'Unit 10',w:'relax',t:'v',ar:'يسترخي',syn:'rest / calm down',ant:'stress / worry'},
+    {u:'Unit 10',w:'repetitive',t:'adj',ar:'متكرر',syn:'repeated / recurring',ant:'varied / different'},
+    {u:'Unit 10',w:'simple',t:'adj',ar:'بسيط',syn:'easy / clear',ant:'difficult / complex'},
+    {u:'Unit 10',w:'struggle',t:'v/n',ar:'يكافح',syn:'fight / strive',ant:'procrastinate / give up'},
+    {u:'Unit 10',w:'supplies',t:'n',ar:'مستلزمات',syn:'materials / equipment',ant:'shortage / lack'},
+  ];
+
+  function doSearch() {
+    const q = document.getElementById('searchBox').value.trim().toLowerCase();
+    const box = document.getElementById('searchResults');
+    if (!q) { box.innerHTML = ''; return; }
+    const res = allWords.filter(d =>
+      d.w.toLowerCase().includes(q) ||
+      d.ar.includes(q) ||
+      d.syn.toLowerCase().includes(q) ||
+      d.ant.toLowerCase().includes(q)
+    );
+    if (!res.length) { box.innerHTML = '<p style="color:var(--text-dim);padding:20px;">لا توجد نتائج</p>'; return; }
+    box.innerHTML = `<table class="vocab-table">
+      <thead><tr>
+        <th>الكلمة</th><th>النوع</th><th>المعنى</th>
+        <th style="color:var(--green)">✅ Synonyms</th>
+        <th style="color:var(--red)">❌ Antonyms</th>
+        <th>الوحدة</th>
+      </tr></thead>
+      <tbody>
+      ${res.map(d=>`<tr>
+        <td class="word-cell">${d.w}</td>
+        <td><span class="type-badge">${d.t}</span></td>
+        <td class="arabic-cell">${d.ar}</td>
+        <td class="syn-cell">${d.syn}</td>
+        <td class="ant-cell">${d.ant}</td>
+        <td style="color:var(--purple);font-size:.8em">${d.u}</td>
+      </tr>`).join('')}
+      </tbody></table>`;
+  }
+
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+</script>
+</body>
+</html>

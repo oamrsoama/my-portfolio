@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تحليل امتحانات كيمياء 2 ثانوي - ترم 2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;700;900&display=swap');
+
+  :root {
+    --bg: #0a0e1a;
+    --card: #111827;
+    --card2: #1a2235;
+    --accent1: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7c3aed;
+    --gold: #fbbf24;
+    --green: #10b981;
+    --red: #ef4444;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(0,212,255,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(124,58,237,0.06) 0%, transparent 50%);
+  }
+
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    position: relative;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, var(--accent1) 50%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    max-width: 900px;
+    margin: 24px auto;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+  }
+  .stat-card.blue::before { background: var(--accent1); }
+  .stat-card.orange::before { background: var(--accent2); }
+  .stat-card.purple::before { background: var(--accent3); }
+  .stat-card.gold::before { background: var(--gold); }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 900;
+    font-family: 'Tajawal', sans-serif;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-card.blue .stat-num { color: var(--accent1); }
+  .stat-card.orange .stat-num { color: var(--accent2); }
+  .stat-card.purple .stat-num { color: var(--accent3); }
+  .stat-card.gold .stat-num { color: var(--gold); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .section {
+    max-width: 900px;
+    margin: 24px auto;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-title h2 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .section-title .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  /* Chapter importance cards */
+  .chapter-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chapter-card::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+  .chapter-card.ch1::after { background: linear-gradient(180deg, var(--accent1), var(--accent3)); }
+  .chapter-card.ch2::after { background: linear-gradient(180deg, var(--gold), var(--accent2)); }
+  .chapter-card.ch3::after { background: linear-gradient(180deg, var(--green), var(--accent1)); }
+
+  .chapter-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .chapter-name {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .chapter-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .badge-pct {
+    font-size: 22px;
+    font-weight: 900;
+    font-family: 'Tajawal', sans-serif;
+  }
+  .ch1 .badge-pct { color: var(--accent1); }
+  .ch2 .badge-pct { color: var(--gold); }
+  .ch3 .badge-pct { color: var(--green); }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease;
+  }
+  .ch1 .progress-fill { background: linear-gradient(90deg, var(--accent1), var(--accent3)); width: 45%; }
+  .ch2 .progress-fill { background: linear-gradient(90deg, var(--gold), var(--accent2)); width: 30%; }
+  .ch3 .progress-fill { background: linear-gradient(90deg, var(--green), var(--accent1)); width: 25%; }
+
+  .topic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .topic-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+
+  .topic-count {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .count-high { background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .count-med { background: rgba(251,191,36,0.2); color: #fde68a; }
+  .count-low { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+
+  .topic-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* Repeat table */
+  .repeat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .repeat-table th {
+    background: rgba(255,255,255,0.06);
+    padding: 10px 14px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--muted);
+    font-size: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .repeat-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .repeat-table tr:hover td {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .fire-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .fire-3 { background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .fire-2 { background: rgba(251,191,36,0.2); color: #fde68a; }
+  .fire-1 { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+
+  /* Tips */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .tip-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .tip-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .tip-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent1);
+    margin-bottom: 6px;
+  }
+
+  .tip-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Warning box */
+  .warning-box {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .warning-box .w-icon { font-size: 22px; flex-shrink: 0; }
+  .warning-box p { font-size: 13px; color: #fde68a; line-height: 1.7; }
+  .warning-box strong { color: var(--gold); }
+
+  /* Summary */
+  .summary-card {
+    background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(124,58,237,0.1));
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .summary-card h3 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent1);
+    margin-bottom: 12px;
+  }
+
+  .summary-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hot-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hq-item {
+    background: var(--card2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .hq-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .hq-num.n1 { background: rgba(239,68,68,0.25); color: #fca5a5; }
+  .hq-num.n2 { background: rgba(251,191,36,0.25); color: #fde68a; }
+  .hq-num.n3 { background: rgba(16,185,129,0.25); color: #6ee7b7; }
+
+  .hq-content h4 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .hq-content p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 8px 0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">تحليل شامل · 17 امتحان</div>
+  <h1>تحليل امتحانات كيمياء<br>2 ثانوي — ترم 2</h1>
+  <p>استعراض 17 نموذج امتحان (5 أزهري + 12 عام) · إعداد تفصيلي للأسئلة المتكررة</p>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+  <div class="stat-card blue">
+    <div class="stat-num">17</div>
+    <div class="stat-label">نموذج امتحان</div>
+  </div>
+  <div class="stat-card orange">
+    <div class="stat-num">3</div>
+    <div class="stat-label">أبواب دراسية</div>
+  </div>
+  <div class="stat-card purple">
+    <div class="stat-num">45%</div>
+    <div class="stat-label">الباب الأول من الامتحان</div>
+  </div>
+  <div class="stat-card gold">
+    <div class="stat-num">17</div>
+    <div class="stat-label">موضوع متكرر رُصد</div>
+  </div>
+</div>
+
+<!-- Chapter Analysis -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:rgba(0,212,255,0.15)">📊</div>
+    <h2 style="color:var(--accent1)">الأبواب حسب الأهمية والدرجات</h2>
+  </div>
+
+  <!-- Chapter 1 -->
+  <div class="chapter-card ch1">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-name">الباب الأول: الروابط والأشكال الفراغية للجزيئات</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px">4 دروس · الأعلى في الامتحانات</div>
+      </div>
+      <div class="chapter-badge">
+        <div>
+          <div class="badge-pct">~45%</div>
+          <div style="font-size:10px; color:var(--muted); text-align:center">من الامتحان</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <div class="topic-list">
+      <div class="topic-item">
+        <span class="topic-count count-high">12+ تكرار</span>
+        <span class="topic-text">نظرية VSEPR والأشكال الفراغية (خطي، مثلث مستوى، هرم، زاوي، رباعي الأوجه) — يجيء في كل امتحان</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">10+ تكرار</span>
+        <span class="topic-text">أنواع التهجين sp / sp² / sp³ — تهجين ذرة الكربون في مركبات العضوية المرقمة</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">9+ تكرار</span>
+        <span class="topic-text">عدد الروابط σ و π في صيغة كيميائية — خاصة المركبات العضوية المتعددة الروابط</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">8+ تكرار</span>
+        <span class="topic-text">قطبية الجزيئات — أيها قطبي / غير قطبي، ترتيب تصاعدياً حسب القطبية</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">7+ تكرار</span>
+        <span class="topic-text">اختصار VSEPR (AXₙEₘ) وتحديد أزواج الإلكترونات الحرة</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">6+ تكرار</span>
+        <span class="topic-text">الروابط الهيدروجينية — ترتيبها حسب القوة (O-H···O > N-H···N > F-H···F بالعكس!)</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">5+ تكرار</span>
+        <span class="topic-text">نظرية تفسير الرابطة التساهمية (فرد الإلكترونات، الذرة المانحة، الرابطة التناسقية)</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-low">4+ تكرار</span>
+        <span class="topic-text">مقارنة بين جزيئات من حيث زوايا الروابط والشكل الفراغي (مثل BF₃ مقابل NH₃)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 3 -->
+  <div class="chapter-card ch3">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-name">الباب الثالث: الكيمياء النووية</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px">3 دروس · ثاني أهم باب بعد الروابط</div>
+      </div>
+      <div class="chapter-badge">
+        <div>
+          <div class="badge-pct">~30%</div>
+          <div style="font-size:10px; color:var(--muted); text-align:center">من الامتحان</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <div class="topic-list">
+      <div class="topic-item">
+        <span class="topic-count count-high">17/17 امتحان</span>
+        <span class="topic-text">حسابات زمن النصف — "عنصر مشع كتلته كذا وزمن نصفه كذا، ما الكتلة بعد كذا وقت؟" — موجودة في كل امتحان بدون استثناء!</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">10+ تكرار</span>
+        <span class="topic-text">كتابة المعادلات النووية (انبعاث ألفا / بيتا / نيوترون) وتحديد العنصر الناتج</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">9+ تكرار</span>
+        <span class="topic-text">خصائص الإشعاعات (ألفا / بيتا / جاما) — الشحنة، الكتلة، القدرة النفاذية، التأثير بالمجال</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">7+ تكرار</span>
+        <span class="topic-text">طاقة الترابط النووي — حساب عجز الكتلة وحساب الطاقة بـ MeV أو eV</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">6+ تكرار</span>
+        <span class="topic-text">الانشطار vs الاندماج النووي — التمييز بينهما وأمثلة على كل منهما</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">5+ تكرار</span>
+        <span class="topic-text">سلسلة التحولات النووية — تحديد قيمة n أو العنصر X في سلسلة تفاعلات متتالية</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-low">4+ تكرار</span>
+        <span class="topic-text">تطبيقات الكيمياء النووية (الساعة الذرية، العلاج بالإشعاع، الخلايا الكهروضوئية)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 2 -->
+  <div class="chapter-card ch2">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-name">الباب الثاني: العناصر المتمثلة في الجدول الدوري</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px">درسين · عناصر الفئة s و p</div>
+      </div>
+      <div class="chapter-badge">
+        <div>
+          <div class="badge-pct">~25%</div>
+          <div style="font-size:10px; color:var(--muted); text-align:center">من الامتحان</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <div class="topic-list">
+      <div class="topic-item">
+        <span class="topic-count count-high">10+ تكرار</span>
+        <span class="topic-text">الكشف الجاف (تجربة اللهب) — ألوان اللهب لكل عنصر: Li أحمر قرمزي · Na أصفر · K بنفسجي · Rb أحمر · Cs أزرق</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">8+ تكرار</span>
+        <span class="topic-text">خواص عناصر المجموعة 1A — تفاعلها مع الماء والأكسجين والحرارة، وما ينتج من كل تفاعل</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-high">7+ تكرار</span>
+        <span class="topic-text">تحضير النشادر وخواصه — المعادلة الكيميائية، تجفيفه، الفرق بين NH₃ وPH₃</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">6+ تكرار</span>
+        <span class="topic-text">حمض النيتريك (مركز ومخفف) — خواصه، تفاعله مع الحديد والنحاس والألومنيوم</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">6+ تكرار</span>
+        <span class="topic-text">الصيغ الكيميائية للمركبات: أرزين As₄O₆ · أباتيت Ca₃(PO₄)₂ · سيليفايت KCl · سيلفايت K₂SO₄</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-med">5+ تكرار</span>
+        <span class="topic-text">عناصر المجموعة 2A (الفلزات القلوية الأرضية) وتفاعلاتها مع الأكسجين والماء</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-low">4+ تكرار</span>
+        <span class="topic-text">طريقة سولفاي لتحضير كربونات الصوديوم — المواد المستخدمة والمراحل</span>
+      </div>
+      <div class="topic-item">
+        <span class="topic-count count-low">4+ تكرار</span>
+        <span class="topic-text">الشكل البياني لتغير الكتلة عند تسخين كربونات الصوديوم — يُفرق بين Li₂CO₃ وNa₂CO₃ وK₂CO₃</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Most Repeated Questions Table -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:rgba(239,68,68,0.15)">🔥</div>
+    <h2 style="color:var(--accent2)">أكتر الأسئلة تكراراً — مرتبة حسب الأولوية</h2>
+  </div>
+  <div style="background:var(--card); border:1px solid rgba(255,255,255,0.07); border-radius:16px; overflow:hidden;">
+    <table class="repeat-table">
+      <thead>
+        <tr>
+          <th style="width:30px">#</th>
+          <th>السؤال / الموضوع</th>
+          <th style="width:90px">التكرار</th>
+          <th style="width:80px">الباب</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">1</td>
+          <td>حساب الكتلة المتبقية أو زمن النصف لعنصر مشع</td>
+          <td><span class="fire-badge fire-3">🔴 17/17</span></td>
+          <td style="color:var(--muted)">الثالث</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">2</td>
+          <td>تحديد الشكل الفراغي لجزيء معين واختصاره VSEPR</td>
+          <td><span class="fire-badge fire-3">🔴 15/17</span></td>
+          <td style="color:var(--muted)">الأول</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">3</td>
+          <td>نوع التهجين لذرة كربون في مركب عضوي (sp/sp²/sp³)</td>
+          <td><span class="fire-badge fire-3">🔴 14/17</span></td>
+          <td style="color:var(--muted)">الأول</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">4</td>
+          <td>عدد الروابط σ و π في صيغة كيميائية</td>
+          <td><span class="fire-badge fire-3">🔴 13/17</span></td>
+          <td style="color:var(--muted)">الأول</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">5</td>
+          <td>خصائص الإشعاعات الثلاثة (تأثير المجال، الشحنة، النفاذية)</td>
+          <td><span class="fire-badge fire-3">🔴 13/17</span></td>
+          <td style="color:var(--muted)">الثالث</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">6</td>
+          <td>كتابة معادلة نووية موزونة (انبعاث ألفا / بيتا)</td>
+          <td><span class="fire-badge fire-3">🔴 12/17</span></td>
+          <td style="color:var(--muted)">الثالث</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">7</td>
+          <td>تجربة الكشف الجاف — لون اللهب لعنصر معين</td>
+          <td><span class="fire-badge fire-3">🔴 12/17</span></td>
+          <td style="color:var(--muted)">الثاني</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">8</td>
+          <td>قطبية الجزيئات — أيها قطبي / غير قطبي</td>
+          <td><span class="fire-badge fire-2">🟡 11/17</span></td>
+          <td style="color:var(--muted)">الأول</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">9</td>
+          <td>تفاعلات عناصر المجموعة 1A مع الماء والأكسجين والحرارة</td>
+          <td><span class="fire-badge fire-2">🟡 10/17</span></td>
+          <td style="color:var(--muted)">الثاني</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">10</td>
+          <td>طاقة الترابط النووي — حساب عجز الكتلة والطاقة</td>
+          <td><span class="fire-badge fire-2">🟡 10/17</span></td>
+          <td style="color:var(--muted)">الثالث</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">11</td>
+          <td>سؤال مقالي: ارسم شكل لويس النقطي لجزيء معين</td>
+          <td><span class="fire-badge fire-2">🟡 9/17</span></td>
+          <td style="color:var(--muted)">الأول</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">12</td>
+          <td>تحضير النشادر في المعمل والصناعة + تجفيفه</td>
+          <td><span class="fire-badge fire-2">🟡 9/17</span></td>
+          <td style="color:var(--muted)">الثاني</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">13</td>
+          <td>الانشطار والاندماج النووي — التمييز بين التفاعلين</td>
+          <td><span class="fire-badge fire-2">🟡 8/17</span></td>
+          <td style="color:var(--muted)">الثالث</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">14</td>
+          <td>مقارنة بين جزيئين (NH₃ و BF₃، أو H₂O و CO₂...) من حيث الشكل والقطبية</td>
+          <td><span class="fire-badge fire-2">🟡 8/17</span></td>
+          <td style="color:var(--muted)">الأول</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">15</td>
+          <td>سلسلة التحولات النووية — ما قيمة n؟ أو ما العنصر الناتج؟</td>
+          <td><span class="fire-badge fire-2">🟡 7/17</span></td>
+          <td style="color:var(--muted)">الثالث</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">16</td>
+          <td>خواص حمض النيتريك المركز (لماذا لا يتفاعل مع الألومنيوم؟)</td>
+          <td><span class="fire-badge fire-1">🟢 6/17</span></td>
+          <td style="color:var(--muted)">الثاني</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800; color:var(--accent1)">17</td>
+          <td>الصيغ الكيميائية: أرزين، أباتيت، سيليفايت، الهاليت، الأرزنيك</td>
+          <td><span class="fire-badge fire-1">🟢 6/17</span></td>
+          <td style="color:var(--muted)">الثاني</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Exam Structure -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:rgba(124,58,237,0.15)">📋</div>
+    <h2 style="color:var(--accent3)">بنية الامتحان النموذجية (ثانوي عام)</h2>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px;">
+    <div style="background:var(--card); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px;">
+      <div style="font-size:22px; margin-bottom:8px">🔵</div>
+      <h4 style="font-weight:800; margin-bottom:6px; font-size:14px">أسئلة 1 → 20</h4>
+      <p style="font-size:12px; color:var(--muted); line-height:1.6">اختيار من متعدد (20 سؤال × 1 درجة = 20 درجة) — يغطي الأبواب الثلاثة بشكل عشوائي</p>
+    </div>
+    <div style="background:var(--card); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px;">
+      <div style="font-size:22px; margin-bottom:8px">🟢</div>
+      <h4 style="font-weight:800; margin-bottom:6px; font-size:14px">أسئلة 21 → 24</h4>
+      <p style="font-size:12px; color:var(--muted); line-height:1.6">أسئلة مقالية (4 أسئلة × ~1-2 درجة) — حسابات زمن النصف، رسم لويس، كتابة معادلات، مقارنة بين مركبات</p>
+    </div>
+    <div style="background:var(--card); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px; border-color:rgba(251,191,36,0.3);">
+      <div style="font-size:22px; margin-bottom:8px">⭐</div>
+      <h4 style="font-weight:800; margin-bottom:6px; font-size:14px; color:var(--gold)">ملاحظة هامة</h4>
+      <p style="font-size:12px; color:var(--muted); line-height:1.6">سؤال الزمن النصف موجود في الجزء المقالي في 15 من أصل 17 امتحان — لازم تعرفه كويس!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Study Tips -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:rgba(16,185,129,0.15)">💡</div>
+    <h2 style="color:var(--green)">نصائح للمذاكرة</h2>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <h4>الأشكال الفراغية — احفظها كلها</h4>
+      <p>خطي: CO₂, BeCl₂, CS₂ · مثلث: BF₃, SO₃ · زاوي: SO₂, H₂O · هرم: NH₃, PH₃ · رباعي: CH₄, CCl₄</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⚡</div>
+      <h4>التهجين — القاعدة السريعة</h4>
+      <p>روابط مفردة فقط = sp³ / رابطة ثنائية واحدة = sp² / رابطة ثلاثية أو ثنائيتين = sp</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">☢️</div>
+      <h4>زمن النصف — الخطوات الثابتة</h4>
+      <p>عدد الفترات = الوقت الكلي ÷ زمن النصف · الكتلة المتبقية = الكتلة الأصلية × (½)ⁿ</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔬</div>
+      <h4>المعادلات النووية</h4>
+      <p>ألفا: العدد الكتلي -4، العدد الذري -2 · بيتا: العدد الكتلي ثابت، العدد الذري +1 · جاما: لا تغيير</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔥</div>
+      <h4>ألوان اللهب — لازم تحفظها</h4>
+      <p>Li = أحمر قرمزي · Na = أصفر ذهبي · K = بنفسجي · Rb = أحمر أرجواني · Cs = أزرق</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🧪</div>
+      <h4>الصيغ الكيميائية المهمة</h4>
+      <p>أرزين = As₄O₆ · أباتيت = Ca₃(PO₄)₂ · هاليت = NaCl · سيليفايت = KCl · سيلفايت = K₂SO₄</p>
+    </div>
+  </div>
+</div>
+
+<!-- Warning -->
+<div class="section">
+  <div class="warning-box">
+    <div class="w-icon">⚠️</div>
+    <p>
+      <strong>أكتر الأخطاء الشائعة في الامتحانات:</strong><br>
+      ١- الخلط بين الشكل الزاوي والهرم الثلاثي (فرق مهم: الزاوي = ذرتان + زوجان حر / الهرم = ثلاث ذرات + زوج حر واحد)<br>
+      ٢- نسيان إن جاما لا تغير لا العدد الذري ولا الكتلي<br>
+      ٣- في زمن النصف: بعض الأسئلة بتسأل عن الكتلة المتحللة مش المتبقية — انتبه لصياغة السؤال!<br>
+      ٤- الخلط بين أمين الهيدروكسيل NH₂OH ورمزه الكيميائي الصحيح
+    </p>
+  </div>
+</div>
+
+<!-- Final Summary -->
+<div class="section">
+  <div class="summary-card">
+    <h3>🏆 خلاصة الخلاصة</h3>
+    <p>
+      الباب الأول (الروابط والأشكال الفراغية) هو <strong style="color:var(--accent1)">نص الامتحان</strong> — ركز عليه أكتر من أي حاجة.<br>
+      زمن النصف في الكيمياء النووية <strong style="color:var(--green)">موجود في كل امتحان بدون استثناء</strong> — احفظ القانون وتدرب على الحسابات.<br>
+      الكشف الجاف وخواص عناصر المجموعة 1A <strong style="color:var(--gold)">بتيجي دايماً في اختيار أو مقالي</strong>.<br>
+      لو ذاكرت الأبواب الثلاثة كويس، هتلاقي نفسك <strong style="color:var(--accent2)">شايف 90% من الامتحان وانت بتقرأ الأسئلة!</strong>
+    </p>
+  </div>
+</div>
+
+<footer>تحليل مبني على 17 نموذج امتحان · كيمياء 2 ثانوي ترم 2 · 2026</footer>
+
+</body>
+</html>
