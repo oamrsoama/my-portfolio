@@ -35,6 +35,144 @@ html{scroll-behavior:smooth;}
   --accent:#e8450a;--accent2:#ff6b35;--text:#a0a0b8;
   --display:'Bebas Neue',sans-serif;--sans:'Inter',sans-serif;--mono:'DM Mono',monospace;
 }
+/* LIGHT THEME */
+html.light{
+  --bg:#ffffff;--bg2:#f4f4f5;--surface:#ebebec;--card:#e4e4e6;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.18);
+  --white:#0a0a0a;--muted:#52525b;--dim:#a1a1aa;
+  --text:#3f3f46;
+}
+html.light body{background:var(--bg);color:var(--text);}
+html.light body::before{
+  background-image:linear-gradient(rgba(0,0,0,.045) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,0,0,.045) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+html.light body::after{opacity:.08;}
+html.light #loader{background:#fff;color:#0a0a0a;}
+html.light .loader-logo{color:#0a0a0a;}
+html.light .loader-bar-wrap{background:rgba(0,0,0,.12);}
+html.light .loader-pct{color:#52525b;}
+
+/* nav & info bar */
+html.light nav{background:rgba(255,255,255,.92);border-bottom-color:rgba(0,0,0,.09);}
+html.light nav.scrolled{background:rgba(255,255,255,.98);box-shadow:0 4px 30px rgba(0,0,0,.08);}
+html.light .logo{color:#0a0a0a;}
+html.light .nav-links a{color:#52525b;}
+html.light .nav-links a:hover{color:#0a0a0a;}
+html.light .nav-links a.active-nav{color:#0a0a0a;}
+html.light .info-bar{background:rgba(255,255,255,.88);border-bottom-color:rgba(0,0,0,.09);color:#52525b;}
+html.light .ib-socials a{border-color:rgba(0,0,0,.12);color:#52525b;}
+html.light .ib-socials a:hover{border-color:rgba(0,0,0,.25);color:#0a0a0a;}
+html.light .ib-sep{background:rgba(0,0,0,.1);}
+
+/* hero */
+html.light .hero-name{color:#0a0a0a;}
+html.light .hero-name-accent{-webkit-text-stroke:1px var(--accent);}
+html.light .hero-name-wrap::before{opacity:.3;}
+html.light .hero-role{color:#52525b;}
+html.light .hero-desc{color:#3f3f46;}
+html.light .hero-desc strong{color:#0a0a0a;}
+html.light .hero-stats{border-top-color:rgba(0,0,0,.09);}
+html.light .h-stat{border-right-color:rgba(0,0,0,.09);}
+html.light .h-stat-n{color:#0a0a0a;}
+html.light .hero-tag .tag-txt{color:#52525b;}
+html.light .hero-hi{color:#52525b;}
+html.light .photo-frame{border-color:rgba(0,0,0,.15);}
+html.light .photo-frame::after{background:linear-gradient(180deg,transparent 55%,rgba(255,255,255,.92) 100%);}
+html.light .photo-tag{background:rgba(255,255,255,.95);border-color:rgba(0,0,0,.12);}
+html.light .pt-name{color:#0a0a0a;}
+html.light .pt-role{color:#52525b;}
+html.light .chip{background:rgba(255,255,255,.97);border-color:rgba(0,0,0,.12);}
+html.light .chip-n{color:#0a0a0a;}
+html.light .chip-l{color:#52525b;}
+html.light .side-tag{color:rgba(0,0,0,.2);}
+html.light .btn-s{color:#0a0a0a;border-color:rgba(0,0,0,.2);}
+html.light .btn-s:hover{border-color:rgba(0,0,0,.35);}
+
+/* marquee & sections */
+html.light .marquee{border-bottom-color:rgba(0,0,0,.09);}
+html.light .marquee-track span{color:#a1a1aa;}
+html.light .s{background:var(--bg);border-bottom-color:rgba(0,0,0,.09);}
+html.light .s-dark{background:var(--bg2);}
+html.light .s-num{color:#52525b;}
+html.light .s-title{color:#0a0a0a;}
+html.light .s-title em{-webkit-text-stroke:1px var(--accent);}
+html.light .s-sub{color:#52525b;}
+
+/* cards & components */
+html.light .icard{background:#f4f4f5;border-color:rgba(0,0,0,.09);color:#3f3f46;}
+html.light .icard:hover{border-color:rgba(0,0,0,.18);}
+html.light .icard strong{color:#0a0a0a;}
+html.light .icard-ico{opacity:.6;}
+html.light .about-body p{color:#3f3f46;}
+html.light .about-body p strong{color:#0a0a0a;}
+html.light .tag-item{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.09);color:#3f3f46;}
+html.light .about-name-tag span{color:#52525b;border-color:rgba(0,0,0,.12);}
+html.light .about-pill{background:#f4f4f5;border-color:rgba(0,0,0,.09);}
+html.light .about-pill-label{color:#3f3f46;}
+html.light .about-pill-circle{background:#e4e4e6;}
+html.light .svc-item,.svc-item-featured{background:#f4f4f5;border-color:rgba(0,0,0,.09);}
+html.light .svc-item:hover,.html.light .svc-item-featured:hover{background:#ebebec;border-color:rgba(0,0,0,.18);}
+html.light .svc-title{color:#0a0a0a;}
+html.light .svc-desc{color:#52525b;}
+html.light .svc-tag{background:rgba(0,0,0,.05);color:#52525b;border-color:rgba(0,0,0,.09);}
+html.light .svc-n{color:rgba(0,0,0,.15);}
+
+/* projects */
+html.light .prj-card{background:#f4f4f5;border-color:rgba(0,0,0,.09);}
+html.light .prj-card:hover{border-color:rgba(232,69,10,.35);}
+html.light .prj-preview{background:#e4e4e6;}
+html.light .prj-preview-num{color:rgba(0,0,0,.12);}
+html.light .prj-name{color:#0a0a0a;}
+html.light .prj-cap{color:#52525b;}
+html.light .prj-idx{color:#a1a1aa;}
+html.light .ptag{background:rgba(0,0,0,.05);color:#52525b;border-color:rgba(0,0,0,.09);}
+html.light .prj-arrow{color:#52525b;border-top-color:rgba(0,0,0,.09);}
+
+/* skills */
+html.light .sk-row{border-color:rgba(0,0,0,.09);}
+html.light .sk-name{color:#0a0a0a;}
+html.light .sk-ico{opacity:.7;}
+html.light .sk-bar-wrap{background:rgba(0,0,0,.1);}
+html.light .sk-pct{color:#52525b;}
+html.light .tool-pill{background:#f4f4f5;border-color:rgba(0,0,0,.09);}
+html.light .tool-label{color:#3f3f46;}
+html.light .tool-circle{background:#e4e4e6;}
+
+/* contact & footer */
+html.light .ct-big{color:#0a0a0a;}
+html.light .ct-big em{-webkit-text-stroke:1px var(--accent);}
+html.light .ct-sub{color:#52525b;}
+html.light .c-lnk{color:#3f3f46;border-color:rgba(0,0,0,.09);}
+html.light .c-lnk:hover{border-color:rgba(232,69,10,.4);color:#0a0a0a;}
+html.light footer{background:#f4f4f5;border-top-color:rgba(0,0,0,.09);color:#52525b;}
+html.light #btt{background:var(--accent);color:#fff;}
+html.light #scroll-bar{box-shadow:0 0 8px rgba(232,69,10,.4);}
+
+/* scrollbar */
+html.light ::-webkit-scrollbar-track{background:#f4f4f5;}
+html.light ::-webkit-scrollbar-thumb{background:var(--accent);}
+
+/* avail badge */
+html.light .avail-badge{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.3);}
+html.light .prj-hd .s-sub{color:#52525b;}
+
+/* THEME TOGGLE BUTTON */
+#theme-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;
+  border-radius:8px;
+  border:1px solid var(--border2);
+  background:var(--surface);
+  color:var(--muted);
+  cursor:pointer;
+  font-size:16px;
+  transition:all .25s ease;
+  flex-shrink:0;
+}
+#theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
@@ -464,6 +602,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact" class="nav-cta">HIRE ME ↗</a></li>
   </ul>
+  <button id="theme-toggle" title="Toggle theme">☀️</button>
 </nav>
 
 <!-- INFO BAR -->
@@ -677,7 +816,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
         <div class="prj-arrow">VIEW PROJECT ↗</div>
       </a>
 
-      <a href="chemistry_analysis.html" class="prj-card tilt rv d2">
+      <a href="تحليل_كيمياء_2ث_ترم2__1_.html" class="prj-card tilt rv d2">
         <div class="prj-preview">
           <div class="prj-preview-num">03</div>
           <span class="prj-preview-badge">SCIENCE</span>
@@ -870,6 +1009,16 @@ const navObserver=new IntersectionObserver(entries=>{
   });
 },{threshold:.4});
 sections.forEach(s=>navObserver.observe(s));
+
+// ── THEME TOGGLE ──
+const themeBtn = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme === 'light'){ document.documentElement.classList.add('light'); themeBtn.textContent = '🌙'; }
+themeBtn.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.toggle('light');
+  themeBtn.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
 
 // ── BACK TO TOP ──
 const btt=document.getElementById('btt');
