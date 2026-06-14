@@ -25,6 +25,8 @@
 <meta name="twitter:image" content="https://omarosama.dev/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- SPLINE 3D VIEWER -->
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -580,6 +582,62 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
 .avail-txt{font-family:var(--mono);font-size:.62rem;letter-spacing:2px;color:#4ade80;text-transform:uppercase;}
 .avail-sep{width:1px;height:12px;background:rgba(74,222,128,.25);}
 .avail-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:1px;color:rgba(74,222,128,.55);}
+
+/* INTERACTIVE 3D */
+.i3d-card{
+  position:relative;
+  border:1px solid var(--border2);
+  border-radius:10px;
+  background:#000;
+  overflow:hidden;
+  min-height:520px;
+  display:flex;
+  align-items:stretch;
+}
+.i3d-glow{
+  position:absolute;
+  top:-30%;left:-15%;
+  width:65%;height:160%;
+  background:radial-gradient(circle,rgba(255,107,53,.22),transparent 70%);
+  filter:blur(70px);
+  pointer-events:none;
+  z-index:1;
+  animation:i3dGlow 5s ease-in-out infinite;
+}
+@keyframes i3dGlow{0%,100%{opacity:.55;transform:translate(0,0) scale(1);}50%{opacity:.9;transform:translate(4%,3%) scale(1.08);}}
+.i3d-content{
+  position:relative;z-index:2;
+  flex:1;min-width:280px;
+  padding:56px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.i3d-heading{
+  font-family:var(--display);
+  font-size:clamp(2.6rem,5vw,4.2rem);
+  letter-spacing:2px;
+  line-height:1;
+  margin-bottom:18px;
+  background:linear-gradient(180deg,#f5f5f5,#8888a0);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.i3d-heading em{font-style:normal;color:var(--accent2);-webkit-text-fill-color:var(--accent2);}
+.i3d-desc{
+  font-size:.85rem;line-height:1.95;
+  color:#a8a8c0;max-width:480px;
+  text-align:right;
+}
+.i3d-scene{
+  flex:1.1;min-width:280px;
+  position:relative;z-index:2;
+}
+.i3d-scene spline-viewer{width:100%;height:100%;display:block;}
+@media(max-width:960px){
+  .i3d-card{flex-direction:column;min-height:auto;}
+  .i3d-content{padding:36px 24px;text-align:center;align-items:center;}
+  .i3d-desc{text-align:right;}
+  .i3d-scene{height:340px;width:100%;}
+}
 </style>
 </head>
 <body>
@@ -602,6 +660,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#interactive3d">3D</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -721,11 +780,31 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
   </div>
 </section>
 
+<!-- INTERACTIVE 3D -->
+<section class="s" id="interactive3d">
+  <div class="s-inner">
+    <div class="rv" style="margin-bottom:44px;">
+      <span class="s-num">// 03 — EXPERIENCE</span>
+      <h2 class="s-title">INTERACTIVE <em>3D</em></h2>
+    </div>
+    <div class="i3d-card rv">
+      <div class="i3d-glow"></div>
+      <div class="i3d-content">
+        <h3 class="i3d-heading">Interactive <em>3D</em></h3>
+        <p class="i3d-desc" dir="rtl">بضيف لمسة تفاعلية لمواقعك بمشاهد 3D حقيقية بتشتغل أونلاين — تجارب بصرية تجذب الزوار وتميّز تصميمك عن أي موقع تاني.</p>
+      </div>
+      <div class="i3d-scene">
+        <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" loading-anim-type="spinner-small-dark"></spline-viewer>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICES -->
 <section class="s" id="services">
   <div class="s-inner">
     <div class="svc-hd rv">
-      <div><span class="s-num">// 03 — WHAT I DO</span><h2 class="s-title">MY <em>SERVICES</em></h2></div>
+      <div><span class="s-num">// 04 — WHAT I DO</span><h2 class="s-title">MY <em>SERVICES</em></h2></div>
       <p class="s-sub" dir="rtl" style="max-width:220px;text-align:right;">خدمات Web Development من البداية للنهاية</p>
     </div>
     <div class="svc-grid">
@@ -786,7 +865,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
 <section class="s s-dark" id="projects">
   <div class="s-inner">
     <div class="prj-hd rv">
-      <div><span class="s-num">// 04 — FEATURED WORK</span><h2 class="s-title">SELECTED <em>PROJECTS</em></h2></div>
+      <div><span class="s-num">// 05 — FEATURED WORK</span><h2 class="s-title">SELECTED <em>PROJECTS</em></h2></div>
       <p class="s-sub" dir="rtl" style="max-width:200px;text-align:right;">مشاريع حقيقية بتعكس مستوى شغلي</p>
     </div>
     <div class="prj-grid">
@@ -843,7 +922,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
 <!-- SKILLS -->
 <section class="s" id="skills">
   <div class="s-inner">
-    <div class="rv" style="margin-bottom:44px;"><span class="s-num">// 05 — MY SKILLS</span><h2 class="s-title">TOOLS & <em>EXPERTISE</em></h2></div>
+    <div class="rv" style="margin-bottom:44px;"><span class="s-num">// 06 — MY SKILLS</span><h2 class="s-title">TOOLS & <em>EXPERTISE</em></h2></div>
     <div class="sk-wrap">
       <div class="sk-grid">
         <div class="sk-row rv"><div class="sk-l"><span class="sk-ico">🌐</span><span class="sk-name">HTML5</span></div><div class="sk-right"><span class="sk-pct">95%</span><div class="sk-bar-wrap"><div class="sk-bar" style="width:95%"></div></div></div></div>
@@ -877,7 +956,7 @@ footer{position:relative;z-index:2;display:flex;align-items:center;justify-conte
 <section class="s s-dark" id="contact">
   <div class="s-inner ct-grid">
     <div class="rv">
-      <span class="s-num">// 06 — LET'S TALK</span>
+      <span class="s-num">// 07 — LET'S TALK</span>
       <h2 class="ct-big">LET'S<br>BUILD<br><em>GREAT.</em></h2>
       <p class="ct-sub" dir="rtl" style="text-align:right;">عندك مشروع في بالك؟ سواء موقع جديد، landing page، أو تجديد موقع قديم — تواصل معايا وهرد عليك.</p>
       <a href="https://wa.me/201011656387" class="ct-btn mag-btn">💬 &nbsp; WHATSAPP NOW</a>
